@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <circle cx="75" cy="75" r="70" fill="#007bff"/>
+  <path fill="#fff" d="M75 5C37 5 5 37 5 75s32 70 70 70 70-32 70-70S113 5 75 5zm57.4 71h-18.5c-.4 17.6-2.7 34.5-6.9 49.9-17.4 4.8-32.1 4.8-49.5 0-4.2-15.4-6.5-32.3-6.9-49.9H32.1c.5-20.8 13.7-39.3 32.9-47.8 17.4-4.8 32.1-4.8 49.5 0 19.2 8.5 32.4 27 32.9 47.8z"/>
+  <text x="75" y="85" text-anchor="middle" fill="white" font-size="45" font-weight="bold" font-family="Arial">GB</text>
+</svg>
