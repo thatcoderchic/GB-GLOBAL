@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
-import logo from '/Users/gayanbenipal/Desktop/project/src/assets/GB_global_logo_withoutbg.png';
+import logo from '../assets/GB_global_logo_withoutbg.png';
 
 const categories = {
   'Washing Machine': [
