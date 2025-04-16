@@ -2,7 +2,11 @@ import { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+<<<<<<< HEAD
 import logo from '/Users/gayanbenipal/Desktop/project/src/assets/GB_global_logo_withoutbg.png';
+=======
+import logo from '../assets/gb-global-logo.svg';
+>>>>>>> 5a8e4021c04e952f6a7715a58e856d09ad33700a
 
 const categories = {
   'Washing Machine': [
@@ -42,8 +46,15 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex">
             <Link to="/" className="flex-shrink-0 flex items-center">
+<<<<<<< HEAD
               <img src={logo} alt="GB Global" className="h-10 w-auto" />
               
+=======
+              <img src={logo} alt="GB Global" className="h-16 w-auto" />
+              <div className="ml-2 flex items-start">
+                <span className="text-2xl font-bold text-gray-900">GB GLOBA<span className="relative">L<sup className="absolute -top-2 text-sm">®</sup></span></span>
+              </div>
+>>>>>>> 5a8e4021c04e952f6a7715a58e856d09ad33700a
             </Link>
           </div>
 
