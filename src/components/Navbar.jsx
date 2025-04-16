@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/GB_global_logo_withoutbg.png';
 
 const categories = {
@@ -36,20 +37,24 @@ export default function Navbar() {
     navigate(`/?search=${encodeURIComponent(searchQuery)}`);
   };
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16"> <div className="flex">
+        <div className="flex h-16 relative">
+          {/* Logo - positioned on the left */}
+          <div className="absolute left-0 flex items-center h-full">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img src={logo} alt="GB Global" className="h-10 w-auto" />
-              
             </Link>
           </div>
 
-          <div className="hidden sm:ml-16 sm:flex sm:space-x-8">
+          {/* Desktop menu - centered */}
+          <div className="hidden sm:flex sm:space-x-8 sm:items-center h-full absolute left-1/2 transform -translate-x-1/2">
             {Object.entries(categories).map(([category, items]) => (
               <Popover key={category} className="relative">
-                {({ open }) => (
+                {() => (
                   <>
                     <Popover.Button className="inline-flex items-center text-gray-500 hover:text-gray-700 px-1 pt-1 text-sm font-medium">
                       {category}
@@ -89,19 +94,85 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center">
-            <form onSubmit={handleSearch} className="flex-shrink-0">
+          {/* Search form - positioned on the right */}
+          <div className="hidden sm:flex items-center absolute right-0 h-full">
+            <form onSubmit={handleSearch} className="flex-shrink-0 flex">
               <input
                 type="search"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="px-4 py-2 border border-r-0 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <MagnifyingGlassIcon className="h-5 w-5" />
+              </button>
             </form>
+          </div>
+
+          {/* Mobile menu button - positioned on the right for mobile */}
+          <div className="absolute right-0 flex items-center sm:hidden h-full">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <span className="sr-only">Open main menu</span>
+              {mobileMenuOpen ? (
+                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div className="sm:hidden">
+          <div className="pt-2 pb-3 space-y-1">
+            {Object.entries(categories).map(([category, items]) => (
+              <div key={category} className="px-4 py-2">
+                <div className="font-medium text-gray-900 mb-2">{category}</div>
+                <div className="pl-4 space-y-1">
+                  {items.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={`/product/${category.toLowerCase()}/${item.id}`}
+                      className="block px-3 py-2 text-base font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="pt-4 pb-3 border-t border-gray-200">
+            <form onSubmit={handleSearch} className="px-4 flex">
+              <input
+                type="search"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 px-4 py-2 border border-r-0 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <MagnifyingGlassIcon className="h-5 w-5" />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
