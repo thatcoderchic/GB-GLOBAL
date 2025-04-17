@@ -160,76 +160,173 @@ export default function Home() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="animate-fade-in">
       {/* Hero Section */}
-      <div className="text-center mb-16 bg-gradient-to-r from-pastel-100 to-pastel-200 py-16 px-4 rounded-2xl shadow-soft">
-        <h1 className="text-4xl font-bold text-gray-800 sm:text-5xl md:text-6xl font-display tracking-tight">
-          Welcome to GB Global<sup className="text-xl text-pastel-600">®</sup>
-        </h1>
-        <p className="mt-3 max-w-md mx-auto text-base text-gray-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-          Your trusted source for quality spare parts
-        </p>
+      <div className="relative overflow-hidden bg-brand-900 mb-16">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-900 to-brand-800 mix-blend-multiply" aria-hidden="true"></div>
+        </div>
+        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-display">
+            Welcome to GB Global<sup className="text-xl text-accent-400">®</sup>
+          </h1>
+          <p className="mt-6 max-w-xl mx-auto text-xl text-brand-100 sm:max-w-3xl">
+            Your trusted source for quality spare parts
+          </p>
+          <div className="mt-10 max-w-md mx-auto sm:max-w-xl sm:flex sm:justify-center">
+            <div className="rounded-md shadow">
+              <a href="#categories" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-brand-700 bg-white hover:bg-brand-50 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
+                Explore Categories
+              </a>
+            </div>
+            <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+              <a href="#about" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Search Results */}
       {searchQuery && (
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 font-display">Search Results</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 animate-slide-up">
+          <div className="border-b border-neutral-200 pb-5 mb-6">
+            <h2 className="text-3xl font-bold text-neutral-800 font-display">Search Results</h2>
+            <p className="mt-2 text-sm text-neutral-500">Showing results for "{searchQuery}"</p>
+          </div>
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProducts.map((product, index) => (
                 <Link
                   key={index}
                   to={`/product/${product.category}/${product.id}`}
-                  className="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pastel-100"
+                  className="group bg-white rounded-xl shadow-card overflow-hidden hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full"
                 >
-                  <img
-                    className="h-48 w-full object-cover"
-                    src={product.image}
-                    alt={product.name}
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
-                    <p className="mt-2 text-gray-600">{product.description}</p>
+                  <div className="aspect-w-16 aspect-h-9 bg-neutral-200 overflow-hidden">
+                    <img
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                      src={product.image}
+                      alt={product.name}
+                    />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <h3 className="text-xl font-semibold text-neutral-800 group-hover:text-brand-600 transition-colors duration-150 ease-in-out">{product.name}</h3>
+                    <p className="mt-2 text-neutral-600 flex-1">{product.description}</p>
+                    <div className="mt-4 flex items-center text-sm text-brand-600 font-medium">
+                      <span>View details</span>
+                      <svg className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-150 ease-in-out" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="text-gray-600 bg-pastel-50 p-4 rounded-lg">No products found matching your search.</p>
+            <div className="bg-brand-50 border border-brand-200 rounded-lg p-6 text-center">
+              <p className="text-neutral-600">No products found matching your search.</p>
+              <p className="mt-2 text-sm text-neutral-500">Try searching for a different term or browse our categories below.</p>
+            </div>
           )}
         </div>
       )}
 
-      {/* About Section */}
-      <div className="bg-white rounded-xl shadow-card p-8 mb-16 border border-pastel-200">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 font-display">About Us</h2>
-        <p className="text-lg text-gray-600 mb-4 leading-relaxed">
-          GB Global is a leading provider of high-quality spare parts for home appliances.
-          With years of experience in the industry, we specialize in supplying genuine parts
-          for washing machines, microwaves, and car washers.
-        </p>
-        <p className="text-lg text-gray-600 leading-relaxed">
-          Our extensive inventory and expertise ensure that we can help you find the exact
-          part you need to keep your appliances running smoothly.
-        </p>
+      {/* Categories Section */}
+      <div id="categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-neutral-800 font-display sm:text-4xl">Browse Our Categories</h2>
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-neutral-500">Find the exact part you need for your appliance</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {categories.map((category, index) => (
+            <div key={index} className="group relative bg-white rounded-2xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-elevated">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+              <img
+                className="h-80 w-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                src={category.image}
+                alt={category.title}
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
+                <h3 className="text-2xl font-bold font-display mb-2">{category.title}</h3>
+                <p className="text-white/90 mb-4">{category.description}</p>
+                <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors duration-150 ease-in-out">
+                  Explore
+                  <svg className="ml-2 -mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Categories Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {categories.map((category, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-pastel-200">
-            <img
-              className="h-48 w-full object-cover"
-              src={category.image}
-              alt={category.title}
-            />
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-gray-800 font-display">{category.title}</h3>
-              <p className="mt-2 text-gray-600">{category.description}</p>
+      {/* About Section */}
+      <div id="about" className="bg-brand-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-neutral-800 font-display sm:text-4xl">About GB Global</h2>
+              <div className="mt-6 text-lg text-neutral-600 space-y-4">
+                <p>
+                  GB Global is a leading provider of high-quality spare parts for home appliances.
+                  With years of experience in the industry, we specialize in supplying genuine parts
+                  for washing machines, microwaves, and car washers.
+                </p>
+                <p>
+                  Our extensive inventory and expertise ensure that we can help you find the exact
+                  part you need to keep your appliances running smoothly.
+                </p>
+              </div>
+              <div className="mt-8">
+                <a href="#" className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors duration-150 ease-in-out">
+                  Contact Us
+                </a>
+              </div>
+            </div>
+            <div className="mt-12 lg:mt-0">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                <div className="bg-white rounded-xl shadow-card p-6 flex flex-col items-center text-center">
+                  <div className="h-12 w-12 rounded-md flex items-center justify-center bg-brand-100 text-brand-600 mb-4">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-5h2v2h-2v-2zm0-8h2v6h-2V7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-neutral-800">Quality Assurance</h3>
+                  <p className="mt-2 text-sm text-neutral-500">All our parts are tested and guaranteed to meet or exceed OEM specifications.</p>
+                </div>
+                <div className="bg-white rounded-xl shadow-card p-6 flex flex-col items-center text-center">
+                  <div className="h-12 w-12 rounded-md flex items-center justify-center bg-brand-100 text-brand-600 mb-4">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M3.783 2.826L12 1l8.217 1.826a1 1 0 01.783.976v9.987a6 6 0 01-2.672 4.992L12 23l-6.328-4.219A6 6 0 013 13.79V3.802a1 1 0 01.783-.976zM5 4.604v9.185a4 4 0 001.781 3.328L12 20.597l5.219-3.48A4 4 0 0019 13.79V4.604L12 3.05 5 4.604z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-neutral-800">Warranty Protection</h3>
+                  <p className="mt-2 text-sm text-neutral-500">Every part comes with a warranty to ensure your satisfaction.</p>
+                </div>
+                <div className="bg-white rounded-xl shadow-card p-6 flex flex-col items-center text-center">
+                  <div className="h-12 w-12 rounded-md flex items-center justify-center bg-brand-100 text-brand-600 mb-4">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 4h13v2H8V4zM4.5 6.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM4 10h17v2H4v-2zm0 7h17v2H4v-2zm0-3.5h13v2H4v-2zM4.5 18.5a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-neutral-800">Extensive Inventory</h3>
+                  <p className="mt-2 text-sm text-neutral-500">We stock thousands of parts for all major appliance brands.</p>
+                </div>
+                <div className="bg-white rounded-xl shadow-card p-6 flex flex-col items-center text-center">
+                  <div className="h-12 w-12 rounded-md flex items-center justify-center bg-brand-100 text-brand-600 mb-4">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-neutral-800">Fast Shipping</h3>
+                  <p className="mt-2 text-sm text-neutral-500">Quick delivery to minimize your downtime.</p>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

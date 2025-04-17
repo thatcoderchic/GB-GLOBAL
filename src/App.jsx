@@ -7,9 +7,9 @@ import Footer from './components/Footer';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-b from-pastel-50 to-white font-sans">
+      <div className="min-h-screen bg-gradient-to-b from-brand-50 to-white font-sans">
         <Navbar />
-        <main className="pb-16">
+        <main className="pb-16 overflow-hidden">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:category/:id" element={<ProductDetails />} />
