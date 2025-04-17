@@ -4,16 +4,65 @@ import { useSearchParams, Link } from 'react-router-dom';
 const allProducts = [
   {
     category: 'washing-machine',
-    id: 'motors',
-    name: 'Washing Machine Motors',
+    id: 'motor',
+    name: 'Washing Machine Motor',
     description: 'High-quality replacement motors for various washing machine brands',
     image: 'https://images.unsplash.com/photo-1621369116334-37136f8e8917?auto=format&fit=crop&q=80&w=400',
   },
   {
     category: 'washing-machine',
-    id: 'pumps',
-    name: 'Water Pumps',
-    description: 'Efficient water pumps for all washing machine models',
+    id: 'gear-raja',
+    name: 'Gear Raja',
+    description: 'Premium quality Gear Raja for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'gear-xindi',
+    name: 'Gear Xindi',
+    description: 'Durable Gear Xindi components for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'timer',
+    name: 'Washing Machine Timer',
+    description: 'Precise timers for all washing machine models',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'clutch',
+    name: 'Washing Machine Clutch',
+    description: 'Reliable clutch mechanisms for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'spin-bellow',
+    name: 'Spin Bellow',
+    description: 'High-quality spin bellows for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'inlet-valve',
+    name: 'Inlet Valve',
+    description: 'Durable inlet valves for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'drain-motor',
+    name: 'Drain Motor',
+    description: 'Efficient drain motors for washing machines',
+    image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'washing-machine',
+    id: 'pressure-switch',
+    name: 'Pressure Switch',
+    description: 'Reliable pressure switches for washing machines',
     image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
   },
   {
@@ -112,12 +161,12 @@ export default function Home() {
       <div className="bg-white rounded-lg shadow-xl p-8 mb-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">About Us</h2>
         <p className="text-lg text-gray-600 mb-4">
-          GB Global is a leading provider of high-quality spare parts for home appliances. 
-          With years of experience in the industry, we specialize in supplying genuine parts 
+          GB Global is a leading provider of high-quality spare parts for home appliances.
+          With years of experience in the industry, we specialize in supplying genuine parts
           for washing machines, microwaves, refrigeration units, and security solutions.
         </p>
         <p className="text-lg text-gray-600">
-          Our extensive inventory and expertise ensure that we can help you find the exact 
+          Our extensive inventory and expertise ensure that we can help you find the exact
           part you need to keep your appliances running smoothly.
         </p>
       </div>

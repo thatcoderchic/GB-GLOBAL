@@ -7,9 +7,15 @@ import logo from '../assets/GB_global_logo_withoutbg.png';
 
 const categories = {
   'Washing Machine': [
-    { name: 'Motors', id: 'motors' },
-    { name: 'Pumps', id: 'pumps' },
-    { name: 'Control Boards', id: 'control-boards' },
+    { name: 'Motor', id: 'motor' },
+    { name: 'Gear Raja', id: 'gear-raja' },
+    { name: 'Gear Xindi', id: 'gear-xindi' },
+    { name: 'Timer', id: 'timer' },
+    { name: 'Clutch', id: 'clutch' },
+    { name: 'Spin Bellow', id: 'spin-bellow' },
+    { name: 'Inlet Valve', id: 'inlet-valve' },
+    { name: 'Drain Motor', id: 'drain-motor' },
+    { name: 'Pressure Switch', id: 'pressure-switch' },
   ],
   'Microwave': [
     { name: 'Magnetrons', id: 'magnetrons' },

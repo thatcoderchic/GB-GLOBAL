@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 
 const productData = {
   'washing-machine': {
-    'motors': {
-      name: 'Washing Machine Motors',
+    'motor': {
+      name: 'Washing Machine Motor',
       description: 'High-quality replacement motors for various washing machine brands',
       features: [
         'Compatible with multiple brands',
@@ -15,7 +15,110 @@ const productData = {
         'https://images.unsplash.com/photo-1621369116334-37136f8e8917?auto=format&fit=crop&q=80&w=400',
       ],
     },
-    // Add more products...
+    'gear-raja': {
+      name: 'Gear Raja',
+      description: 'Premium quality Gear Raja for washing machines',
+      features: [
+        'Durable construction',
+        'Precision engineered',
+        'Noise reduction',
+        'Extended lifespan',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'gear-xindi': {
+      name: 'Gear Xindi',
+      description: 'Durable Gear Xindi components for washing machines',
+      features: [
+        'High-grade materials',
+        'Smooth operation',
+        'Reduced vibration',
+        'Compatible with major brands',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'timer': {
+      name: 'Washing Machine Timer',
+      description: 'Precise timers for all washing machine models',
+      features: [
+        'Accurate timing',
+        'Multiple cycle options',
+        'Easy to program',
+        'Reliable performance',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'clutch': {
+      name: 'Washing Machine Clutch',
+      description: 'Reliable clutch mechanisms for washing machines',
+      features: [
+        'Smooth engagement',
+        'Reduced wear and tear',
+        'Quiet operation',
+        'Extended service life',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'spin-bellow': {
+      name: 'Spin Bellow',
+      description: 'High-quality spin bellows for washing machines',
+      features: [
+        'Leak-proof design',
+        'Flexible material',
+        'Resistant to detergents',
+        'Long-lasting durability',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'inlet-valve': {
+      name: 'Inlet Valve',
+      description: 'Durable inlet valves for washing machines',
+      features: [
+        'Precise water control',
+        'Leak-free operation',
+        'Compatible with standard connections',
+        'Easy installation',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'drain-motor': {
+      name: 'Drain Motor',
+      description: 'Efficient drain motors for washing machines',
+      features: [
+        'Powerful drainage',
+        'Quiet operation',
+        'Energy efficient',
+        'Resistant to blockages',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'pressure-switch': {
+      name: 'Pressure Switch',
+      description: 'Reliable pressure switches for washing machines',
+      features: [
+        'Accurate water level detection',
+        'Consistent performance',
+        'Safety certified',
+        'Compatible with most models',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
   },
   'microwave': {
     'magnetrons': {
@@ -85,7 +188,7 @@ export default function ProductDetails() {
           <div className="mt-8 border-t border-gray-200 pt-8">
             <h3 className="text-sm font-medium text-gray-900">Additional Information</h3>
             <p className="mt-4 text-sm text-gray-500">
-              For detailed specifications, availability, and compatibility information, 
+              For detailed specifications, availability, and compatibility information,
               please contact our support team.
             </p>
           </div>
