@@ -237,51 +237,59 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-900">Product not found</h2>
+        <div className="bg-secondary-50 p-8 rounded-xl shadow-soft text-center">
+          <h2 className="text-2xl font-bold text-secondary-800 font-display">Product not found</h2>
+          <p className="mt-2 text-secondary-600">The product you're looking for doesn't exist or has been removed.</p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+      <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 lg:items-start bg-white rounded-xl shadow-card p-6 lg:p-8 border border-secondary-100">
         {/* Image gallery */}
         <div className="flex flex-col-reverse">
           <div className="w-full aspect-w-1 aspect-h-1">
             <img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-center object-cover sm:rounded-lg"
+              className="w-full h-full object-center object-cover rounded-xl shadow-soft"
             />
           </div>
         </div>
 
         {/* Product info */}
         <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">{product.name}</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight text-secondary-800 font-display">{product.name}</h1>
 
           <div className="mt-6">
             <h3 className="sr-only">Description</h3>
-            <div className="text-base text-gray-700">{product.description}</div>
+            <div className="text-base text-secondary-700 leading-relaxed">{product.description}</div>
           </div>
 
-          <div className="mt-6">
-            <h3 className="text-sm font-medium text-gray-900">Features</h3>
-            <div className="mt-4">
+          <div className="mt-8">
+            <h3 className="text-lg font-medium text-secondary-800 font-display">Features</h3>
+            <div className="mt-4 bg-secondary-50 p-4 rounded-lg">
               <ul className="pl-4 list-disc space-y-2">
                 {product.features.map((feature, index) => (
-                  <li key={index} className="text-sm text-gray-500">{feature}</li>
+                  <li key={index} className="text-secondary-700">{feature}</li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="mt-8 border-t border-gray-200 pt-8">
-            <h3 className="text-sm font-medium text-gray-900">Additional Information</h3>
-            <p className="mt-4 text-sm text-gray-500">
+          <div className="mt-8 border-t border-secondary-200 pt-8">
+            <h3 className="text-lg font-medium text-secondary-800 font-display">Additional Information</h3>
+            <p className="mt-4 text-secondary-700">
               For detailed specifications, availability, and compatibility information,
               please contact our support team.
             </p>
+            <div className="mt-6">
+              <button className="bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition duration-150 ease-in-out font-medium">
+                Request Information
+              </button>
+            </div>
           </div>
         </div>
       </div>
