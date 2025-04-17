@@ -23,15 +23,11 @@ const categories = {
     { name: 'Glass Tray', id: 'glass-tray' },
     { name: 'Fuse', id: 'fuse' },
   ],
-  'Refrigeration': [
-    { name: 'Compressors', id: 'compressors' },
-    { name: 'Thermostats', id: 'thermostats' },
-    { name: 'Fan Motors', id: 'fan-motors' },
-  ],
-  'Door Locks': [
-    { name: 'Digital Locks', id: 'digital-locks' },
-    { name: 'Mechanical Locks', id: 'mechanical-locks' },
-    { name: 'Smart Locks', id: 'smart-locks' },
+  'Car Washer': [
+    { name: 'Washer', id: 'washer' },
+    { name: 'Head', id: 'head' },
+    { name: 'Pipe', id: 'pipe' },
+    { name: 'Adopter', id: 'adopter' },
   ],
 };
 

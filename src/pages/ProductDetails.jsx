@@ -174,7 +174,60 @@ const productData = {
       ],
     },
   },
-  // Add more categories...
+  'car-washer': {
+    'washer': {
+      name: 'Car Washer',
+      description: 'Complete car washer units for home and professional use',
+      features: [
+        'High pressure cleaning',
+        'Adjustable spray patterns',
+        'Durable construction',
+        'Energy efficient motor',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'head': {
+      name: 'Car Washer Head',
+      description: 'Replacement and upgrade heads for car washers',
+      features: [
+        'Multiple spray patterns',
+        'Durable materials',
+        'Universal fitting',
+        'Improved cleaning efficiency',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'pipe': {
+      name: 'Car Washer Pipe',
+      description: 'Durable pipes for car washer systems',
+      features: [
+        'High pressure resistant',
+        'Flexible design',
+        'UV protected',
+        'Kink resistant',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'adopter': {
+      name: 'Car Washer Adopter',
+      description: 'Universal adopters for car washer connections',
+      features: [
+        'Compatible with most brands',
+        'Leak-proof seal',
+        'Easy installation',
+        'Durable construction',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+  },
 };
 
 export default function ProductDetails() {

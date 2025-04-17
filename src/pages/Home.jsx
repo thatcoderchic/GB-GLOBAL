@@ -93,6 +93,34 @@ const allProducts = [
     description: 'Safety fuses for microwave ovens',
     image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
   },
+  {
+    category: 'car-washer',
+    id: 'washer',
+    name: 'Car Washer',
+    description: 'Complete car washer units for home and professional use',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'car-washer',
+    id: 'head',
+    name: 'Car Washer Head',
+    description: 'Replacement and upgrade heads for car washers',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'car-washer',
+    id: 'pipe',
+    name: 'Car Washer Pipe',
+    description: 'Durable pipes for car washer systems',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'car-washer',
+    id: 'adopter',
+    name: 'Car Washer Adopter',
+    description: 'Universal adopters for car washer connections',
+    image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+  }
   // Add more products here as needed
 ];
 
@@ -125,14 +153,9 @@ export default function Home() {
       image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
     },
     {
-      title: 'Refrigeration Spares',
-      description: 'Essential parts for cooling systems',
-      image: 'https://images.unsplash.com/photo-1584568694244-14fbdf83bd30?auto=format&fit=crop&q=80&w=400',
-    },
-    {
-      title: 'Door Locks',
-      description: 'Security solutions for all applications',
-      image: 'https://images.unsplash.com/photo-1516162759129-aa35215a3936?auto=format&fit=crop&q=80&w=400',
+      title: 'Car Washer Parts',
+      description: 'High-quality components for car washers',
+      image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
     },
   ];
 
