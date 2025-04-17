@@ -162,11 +162,11 @@ export default function Home() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Hero Section */}
-      <div className="text-center mb-16 bg-gradient-to-r from-primary-50 to-secondary-50 py-16 px-4 rounded-2xl shadow-soft">
-        <h1 className="text-4xl font-bold text-secondary-800 sm:text-5xl md:text-6xl font-display tracking-tight">
-          Welcome to GB Global<sup className="text-xl text-primary-600">®</sup>
+      <div className="text-center mb-16 bg-gradient-to-r from-pastel-100 to-pastel-200 py-16 px-4 rounded-2xl shadow-soft">
+        <h1 className="text-4xl font-bold text-gray-800 sm:text-5xl md:text-6xl font-display tracking-tight">
+          Welcome to GB Global<sup className="text-xl text-pastel-600">®</sup>
         </h1>
-        <p className="mt-3 max-w-md mx-auto text-base text-secondary-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+        <p className="mt-3 max-w-md mx-auto text-base text-gray-600 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
           Your trusted source for quality spare parts
         </p>
       </div>
@@ -174,14 +174,14 @@ export default function Home() {
       {/* Search Results */}
       {searchQuery && (
         <div className="mb-16">
-          <h2 className="text-2xl font-bold text-secondary-800 mb-6 font-display">Search Results</h2>
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 font-display">Search Results</h2>
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product, index) => (
                 <Link
                   key={index}
                   to={`/product/${product.category}/${product.id}`}
-                  className="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                  className="bg-white rounded-xl shadow-card overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-pastel-100"
                 >
                   <img
                     className="h-48 w-full object-cover"
@@ -189,27 +189,27 @@ export default function Home() {
                     alt={product.name}
                   />
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-secondary-800">{product.name}</h3>
-                    <p className="mt-2 text-secondary-600">{product.description}</p>
+                    <h3 className="text-xl font-semibold text-gray-800">{product.name}</h3>
+                    <p className="mt-2 text-gray-600">{product.description}</p>
                   </div>
                 </Link>
               ))}
             </div>
           ) : (
-            <p className="text-secondary-600 bg-secondary-50 p-4 rounded-lg">No products found matching your search.</p>
+            <p className="text-gray-600 bg-pastel-50 p-4 rounded-lg">No products found matching your search.</p>
           )}
         </div>
       )}
 
       {/* About Section */}
-      <div className="bg-white rounded-xl shadow-card p-8 mb-16 border border-primary-100">
-        <h2 className="text-3xl font-bold text-secondary-800 mb-6 font-display">About Us</h2>
-        <p className="text-lg text-secondary-600 mb-4 leading-relaxed">
+      <div className="bg-white rounded-xl shadow-card p-8 mb-16 border border-pastel-200">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 font-display">About Us</h2>
+        <p className="text-lg text-gray-600 mb-4 leading-relaxed">
           GB Global is a leading provider of high-quality spare parts for home appliances.
           With years of experience in the industry, we specialize in supplying genuine parts
           for washing machines, microwaves, and car washers.
         </p>
-        <p className="text-lg text-secondary-600 leading-relaxed">
+        <p className="text-lg text-gray-600 leading-relaxed">
           Our extensive inventory and expertise ensure that we can help you find the exact
           part you need to keep your appliances running smoothly.
         </p>
@@ -218,15 +218,15 @@ export default function Home() {
       {/* Categories Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categories.map((category, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-secondary-100">
+          <div key={index} className="bg-white rounded-xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg border border-pastel-200">
             <img
               className="h-48 w-full object-cover"
               src={category.image}
               alt={category.title}
             />
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-secondary-800 font-display">{category.title}</h3>
-              <p className="mt-2 text-secondary-600">{category.description}</p>
+              <h3 className="text-xl font-semibold text-gray-800 font-display">{category.title}</h3>
+              <p className="mt-2 text-gray-600">{category.description}</p>
             </div>
           </div>
         ))}

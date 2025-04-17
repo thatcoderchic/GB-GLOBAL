@@ -59,7 +59,7 @@ export default function Navbar() {
               <Popover key={category} className="relative">
                 {() => (
                   <>
-                    <Popover.Button className="inline-flex items-center text-secondary-600 hover:text-primary-600 px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">
+                    <Popover.Button className="inline-flex items-center text-gray-600 hover:text-pastel-600 px-1 pt-1 text-sm font-medium transition duration-150 ease-in-out">
                       {category}
                       <ChevronDownIcon className="ml-2 h-5 w-5" aria-hidden="true" />
                     </Popover.Button>
@@ -74,15 +74,15 @@ export default function Navbar() {
                       leaveTo="opacity-0 translate-y-1"
                     >
                       <Popover.Panel className="absolute z-10 mt-3 w-screen max-w-xs px-2 sm:px-0">
-                        <div className="rounded-lg shadow-card ring-1 ring-black ring-opacity-5 overflow-hidden">
+                        <div className="rounded-lg shadow-card ring-1 ring-pastel-200 ring-opacity-50 overflow-hidden">
                           <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-6 sm:p-8">
                             {items.map((item) => (
                               <Link
                                 key={item.id}
                                 to={`/product/${category.toLowerCase()}/${item.id}`}
-                                className="-m-3 p-3 block rounded-md hover:bg-primary-50 transition duration-150 ease-in-out"
+                                className="-m-3 p-3 block rounded-md hover:bg-pastel-50 transition duration-150 ease-in-out"
                               >
-                                <p className="text-base font-medium text-secondary-800">
+                                <p className="text-base font-medium text-gray-700">
                                   {item.name}
                                 </p>
                               </Link>
@@ -105,11 +105,11 @@ export default function Navbar() {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="px-4 py-2 border border-r-0 border-secondary-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-150 ease-in-out"
+                className="px-4 py-2 border border-r-0 border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-pastel-400 focus:border-pastel-400 transition duration-150 ease-in-out"
               />
               <button
                 type="submit"
-                className="bg-primary-600 text-white px-4 py-2 rounded-r-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition duration-150 ease-in-out"
+                className="bg-pastel-500 text-white px-4 py-2 rounded-r-lg hover:bg-pastel-600 focus:outline-none focus:ring-2 focus:ring-pastel-400 transition duration-150 ease-in-out"
               >
                 <MagnifyingGlassIcon className="h-5 w-5" />
               </button>
@@ -120,7 +120,7 @@ export default function Navbar() {
           <div className="absolute right-0 flex items-center sm:hidden h-full">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-secondary-400 hover:text-secondary-500 hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition duration-150 ease-in-out"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-pastel-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-pastel-400 transition duration-150 ease-in-out"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
@@ -140,13 +140,13 @@ export default function Navbar() {
           <div className="pt-2 pb-3 space-y-1">
             {Object.entries(categories).map(([category, items]) => (
               <div key={category} className="px-4 py-2">
-                <div className="font-medium text-secondary-800 mb-2 font-display">{category}</div>
+                <div className="font-medium text-gray-700 mb-2 font-display">{category}</div>
                 <div className="pl-4 space-y-1">
                   {items.map((item) => (
                     <Link
                       key={item.id}
                       to={`/product/${category.toLowerCase()}/${item.id}`}
-                      className="block px-3 py-2 text-base font-medium text-secondary-600 hover:text-primary-600 hover:bg-primary-50 rounded-md transition duration-150 ease-in-out"
+                      className="block px-3 py-2 text-base font-medium text-gray-600 hover:text-pastel-600 hover:bg-pastel-50 rounded-md transition duration-150 ease-in-out"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}
@@ -156,18 +156,18 @@ export default function Navbar() {
               </div>
             ))}
           </div>
-          <div className="pt-4 pb-3 border-t border-secondary-200">
+          <div className="pt-4 pb-3 border-t border-gray-200">
             <form onSubmit={handleSearch} className="px-4 flex">
               <input
                 type="search"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2 border border-r-0 border-secondary-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition duration-150 ease-in-out"
+                className="flex-1 px-4 py-2 border border-r-0 border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-pastel-400 focus:border-pastel-400 transition duration-150 ease-in-out"
               />
               <button
                 type="submit"
-                className="bg-primary-600 text-white px-4 py-2 rounded-r-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 transition duration-150 ease-in-out"
+                className="bg-pastel-500 text-white px-4 py-2 rounded-r-lg hover:bg-pastel-600 focus:outline-none focus:ring-2 focus:ring-pastel-400 transition duration-150 ease-in-out"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <MagnifyingGlassIcon className="h-5 w-5" />
