@@ -42,11 +42,11 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 relative">
+        <div className="flex h-20 relative">
           {/* Logo - positioned on the left */}
-          <div className="absolute left-0 flex items-center h-full">
+          <div className="absolute left-0 flex items-center h-full pl-2">
             <Link to="/" className="flex-shrink-0 flex items-center">
-              <img src={logo} alt="GB Global" className="h-10 w-auto" />
+              <img src={logo} alt="GB Global" className="h-16 w-auto" />
             </Link>
           </div>
 
