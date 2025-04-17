@@ -49,8 +49,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <img src={logo} alt="GB Global" className="h-14 w-auto" />
-              <span className="hidden md:block text-xl font-display font-semibold text-brand-700">GB Global</span>
+              <img src={logo} alt="Logo" className="h-14 w-auto" />
             </Link>
           </div>
 
