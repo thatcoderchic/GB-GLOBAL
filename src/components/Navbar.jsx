@@ -18,9 +18,10 @@ const categories = {
     { name: 'Pressure Switch', id: 'pressure-switch' },
   ],
   'Microwave': [
-    { name: 'Magnetrons', id: 'magnetrons' },
-    { name: 'Turntable Motors', id: 'turntable-motors' },
-    { name: 'Door Switches', id: 'door-switches' },
+    { name: 'Magnatron', id: 'magnatron' },
+    { name: 'Transformer', id: 'transformer' },
+    { name: 'Glass Tray', id: 'glass-tray' },
+    { name: 'Fuse', id: 'fuse' },
   ],
   'Refrigeration': [
     { name: 'Compressors', id: 'compressors' },

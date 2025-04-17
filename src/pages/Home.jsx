@@ -67,9 +67,30 @@ const allProducts = [
   },
   {
     category: 'microwave',
-    id: 'magnetrons',
-    name: 'Microwave Magnetrons',
-    description: 'Reliable magnetrons for microwave repair and replacement',
+    id: 'magnatron',
+    name: 'Microwave Magnatron',
+    description: 'Reliable magnatrons for microwave repair and replacement',
+    image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'microwave',
+    id: 'transformer',
+    name: 'Microwave Transformer',
+    description: 'High-quality transformers for microwave ovens',
+    image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'microwave',
+    id: 'glass-tray',
+    name: 'Microwave Glass Tray',
+    description: 'Replacement glass trays for various microwave models',
+    image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+  },
+  {
+    category: 'microwave',
+    id: 'fuse',
+    name: 'Microwave Fuse',
+    description: 'Safety fuses for microwave ovens',
     image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
   },
   // Add more products here as needed

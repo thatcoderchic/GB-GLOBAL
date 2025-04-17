@@ -121,9 +121,9 @@ const productData = {
     },
   },
   'microwave': {
-    'magnetrons': {
-      name: 'Microwave Magnetrons',
-      description: 'Reliable magnetrons for microwave repair and replacement',
+    'magnatron': {
+      name: 'Microwave Magnatron',
+      description: 'Reliable magnatrons for microwave repair and replacement',
       features: [
         'High-performance components',
         'Durable construction',
@@ -134,7 +134,45 @@ const productData = {
         'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
       ],
     },
-    // Add more products...
+    'transformer': {
+      name: 'Microwave Transformer',
+      description: 'High-quality transformers for microwave ovens',
+      features: [
+        'Efficient power conversion',
+        'Thermal protection',
+        'Long service life',
+        'Universal compatibility',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'glass-tray': {
+      name: 'Microwave Glass Tray',
+      description: 'Replacement glass trays for various microwave models',
+      features: [
+        'Heat-resistant glass',
+        'Precise fit',
+        'Easy to clean',
+        'Dishwasher safe',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'fuse': {
+      name: 'Microwave Fuse',
+      description: 'Safety fuses for microwave ovens',
+      features: [
+        'Quick response time',
+        'Overload protection',
+        'Easy replacement',
+        'Safety certified',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
   },
   // Add more categories...
 };
