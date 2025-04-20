@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
+import GearBoxRaja from './pages/GearBoxRaja';
 import Footer from './components/Footer';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:category/:id" element={<ProductDetails />} />
+            <Route path="/gearbox-raja" element={<GearBoxRaja />} />
           </Routes>
         </main>
         <Footer />
