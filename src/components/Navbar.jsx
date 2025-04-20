@@ -18,8 +18,14 @@ const categories = {
         { name: 'Drain Motor', id: 'drain-motor' },
       ]
     },
-    { name: 'Gear Raja', id: 'gear-raja' },
-    { name: 'Gear Xindi', id: 'gear-xindi' },
+    {
+      name: 'Gear Box',
+      id: 'gear-box',
+      subItems: [
+        { name: 'Gear Box RAJA', id: 'gear-box-raja' },
+        { name: 'Gear Box Xindi', id: 'gear-box-xindi' },
+      ]
+    },
     { name: 'Timer', id: 'timer' },
     { name: 'Clutch', id: 'clutch' },
     { name: 'Spin Bellow', id: 'spin-bellow' },
