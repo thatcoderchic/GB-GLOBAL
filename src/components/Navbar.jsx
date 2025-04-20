@@ -4,7 +4,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/GB_global_logo_withoutbg.png';
-
+import { getItemImagePath } from '../utils/imageUtils';
 
 
 const categories = {
@@ -128,7 +128,19 @@ export default function Navbar() {
                                             to={`/product/${category.toLowerCase()}/${subItem.id}`}
                                             className="flex items-center px-4 py-2 hover:bg-brand-50 transition duration-150 ease-in-out"
                                           >
-
+                                            {getItemImagePath(category, subItem.id) && (
+                                              <div className="flex-shrink-0 h-10 w-10 rounded-md overflow-hidden">
+                                                <img
+                                                  src={getItemImagePath(category, subItem.id)}
+                                                  alt={subItem.name}
+                                                  className="h-full w-full object-cover"
+                                                  onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.style.display = 'none';
+                                                  }}
+                                                />
+                                              </div>
+                                            )}
                                             <div className="ml-3">
                                               <p className="text-sm font-medium text-neutral-700">
                                                 {subItem.name}
@@ -146,7 +158,19 @@ export default function Navbar() {
                                   to={`/product/${category.toLowerCase()}/${item.id}`}
                                   className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
                                 >
-
+                                  {getItemImagePath(category, item.id) && (
+                                    <div className="flex-shrink-0 h-10 w-10 rounded-md overflow-hidden">
+                                      <img
+                                        src={getItemImagePath(category, item.id)}
+                                        alt={item.name}
+                                        className="h-full w-full object-cover"
+                                        onError={(e) => {
+                                          e.target.onerror = null;
+                                          e.target.style.display = 'none';
+                                        }}
+                                      />
+                                    </div>
+                                  )}
                                   <div className="ml-3">
                                     <p className="text-base font-medium text-neutral-800">
                                       {item.name}
@@ -239,7 +263,19 @@ export default function Navbar() {
                               className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-
+                              {getItemImagePath(category, subItem.id) && (
+                                <div className="flex-shrink-0 h-8 w-8 rounded-md overflow-hidden mr-2">
+                                  <img
+                                    src={getItemImagePath(category, subItem.id)}
+                                    alt={subItem.name}
+                                    className="h-full w-full object-cover"
+                                    onError={(e) => {
+                                      e.target.onerror = null;
+                                      e.target.style.display = 'none';
+                                    }}
+                                  />
+                                </div>
+                              )}
                               {subItem.name}
                             </Link>
                           ))}
@@ -252,7 +288,19 @@ export default function Navbar() {
                         className="flex items-center px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-
+                        {getItemImagePath(category, item.id) && (
+                          <div className="flex-shrink-0 h-8 w-8 rounded-md overflow-hidden mr-2">
+                            <img
+                              src={getItemImagePath(category, item.id)}
+                              alt={item.name}
+                              className="h-full w-full object-cover"
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        )}
                         {item.name}
                       </Link>
                     )
