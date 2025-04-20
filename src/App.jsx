@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
 import GearBoxRaja from './pages/GearBoxRaja';
+import SpinMotor from './pages/SpinMotor';
 import Footer from './components/Footer';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/product/:category/:id" element={<ProductDetails />} />
             <Route path="/gearbox-raja" element={<GearBoxRaja />} />
+            <Route path="/spin-motor" element={<SpinMotor />} />
           </Routes>
         </main>
         <Footer />
