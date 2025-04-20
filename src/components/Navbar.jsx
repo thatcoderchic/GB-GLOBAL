@@ -5,6 +5,18 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/GB_global_logo_withoutbg.png';
 
+// This function will be used to dynamically load product images
+const getProductImage = (category, id) => {
+  try {
+    // Try to import the image dynamically
+    return new URL(`../assets/products/${category}/${id}.jpg`, import.meta.url).href;
+  } catch (error) {
+    // If the image doesn't exist, return null
+    console.warn(`Image for ${category}/${id} not found`);
+    return null;
+  }
+};
+
 const categories = {
   'Washing Machine': [
     {
@@ -90,32 +102,60 @@ export default function Navbar() {
                           <div className="relative grid gap-1 bg-white px-5 py-6">
                             {items.map((item) => (
                               item.subItems ? (
-                                <div key={item.id} className="relative">
-                                  <div className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out cursor-pointer group">
+                                <div key={item.id} className="relative group">
+                                  <div className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out cursor-pointer">
                                     <div className="ml-3 flex items-center justify-between w-full">
                                       <p className="text-base font-medium text-neutral-800">
                                         {item.name}
                                       </p>
-                                      <ChevronDownIcon
+                                      <svg
                                         className="ml-2 h-4 w-4 text-neutral-400 group-hover:text-brand-500"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
                                         aria-hidden="true"
-                                      />
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
                                     </div>
                                   </div>
-                                  <div className="pl-6 mt-1 space-y-1">
-                                    {item.subItems.map((subItem) => (
-                                      <Link
-                                        key={subItem.id}
-                                        to={`/product/${category.toLowerCase()}/${subItem.id}`}
-                                        className="flex items-center p-2 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
-                                      >
-                                        <div className="ml-3">
-                                          <p className="text-sm font-medium text-neutral-700">
-                                            {subItem.name}
-                                          </p>
-                                        </div>
-                                      </Link>
-                                    ))}
+                                  {/* Flyout menu */}
+                                  <div className="absolute left-full top-0 ml-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 ease-in-out z-20">
+                                    <div className="bg-white rounded-xl shadow-elevated overflow-hidden border border-neutral-100">
+                                      <div className="py-2">
+                                        {item.subItems.map((subItem) => (
+                                          <Link
+                                            key={subItem.id}
+                                            to={`/product/${category.toLowerCase()}/${subItem.id}`}
+                                            className="flex items-center px-4 py-2 hover:bg-brand-50 transition duration-150 ease-in-out"
+                                          >
+                                            <div className="flex-shrink-0 h-8 w-8 bg-neutral-100 rounded-md overflow-hidden">
+                                              {getProductImage(category.toLowerCase(), subItem.id) ? (
+                                                <img
+                                                  src={getProductImage(category.toLowerCase(), subItem.id)}
+                                                  alt={subItem.name}
+                                                  className="h-full w-full object-cover"
+                                                />
+                                              ) : (
+                                                <div className="h-full w-full flex items-center justify-center text-neutral-400">
+                                                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                  </svg>
+                                                </div>
+                                              )}
+                                            </div>
+                                            <div className="ml-3">
+                                              <p className="text-sm font-medium text-neutral-700">
+                                                {subItem.name}
+                                              </p>
+                                            </div>
+                                          </Link>
+                                        ))}
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               ) : (
@@ -124,6 +164,21 @@ export default function Navbar() {
                                   to={`/product/${category.toLowerCase()}/${item.id}`}
                                   className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
                                 >
+                                  <div className="flex-shrink-0 h-10 w-10 bg-neutral-100 rounded-md overflow-hidden">
+                                    {getProductImage(category.toLowerCase(), item.id) ? (
+                                      <img
+                                        src={getProductImage(category.toLowerCase(), item.id)}
+                                        alt={item.name}
+                                        className="h-full w-full object-cover"
+                                      />
+                                    ) : (
+                                      <div className="h-full w-full flex items-center justify-center text-neutral-400">
+                                        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                      </div>
+                                    )}
+                                  </div>
                                   <div className="ml-3">
                                     <p className="text-base font-medium text-neutral-800">
                                       {item.name}
@@ -208,14 +263,29 @@ export default function Navbar() {
                           <span>{item.name}</span>
                           <ChevronDownIcon className="h-5 w-5 text-neutral-400" aria-hidden="true" />
                         </div>
-                        <div className="pl-6 space-y-1 mt-1">
+                        <div className="pl-6 space-y-1 mt-1 border-l-2 border-brand-100">
                           {item.subItems.map((subItem) => (
                             <Link
                               key={subItem.id}
                               to={`/product/${category.toLowerCase()}/${subItem.id}`}
-                              className="block px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                              className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
+                              <div className="flex-shrink-0 h-6 w-6 bg-neutral-100 rounded-md overflow-hidden mr-2">
+                                {getProductImage(category.toLowerCase(), subItem.id) ? (
+                                  <img
+                                    src={getProductImage(category.toLowerCase(), subItem.id)}
+                                    alt={subItem.name}
+                                    className="h-full w-full object-cover"
+                                  />
+                                ) : (
+                                  <div className="h-full w-full flex items-center justify-center text-neutral-400">
+                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                  </div>
+                                )}
+                              </div>
                               {subItem.name}
                             </Link>
                           ))}
@@ -225,9 +295,24 @@ export default function Navbar() {
                       <Link
                         key={item.id}
                         to={`/product/${category.toLowerCase()}/${item.id}`}
-                        className="block px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                        className="flex items-center px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                         onClick={() => setMobileMenuOpen(false)}
                       >
+                        <div className="flex-shrink-0 h-8 w-8 bg-neutral-100 rounded-md overflow-hidden mr-3">
+                          {getProductImage(category.toLowerCase(), item.id) ? (
+                            <img
+                              src={getProductImage(category.toLowerCase(), item.id)}
+                              alt={item.name}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center text-neutral-400">
+                              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
                         {item.name}
                       </Link>
                     )
