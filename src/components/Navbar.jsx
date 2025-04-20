@@ -14,7 +14,7 @@ const categories = {
       id: 'motor',
       subItems: [
         { name: 'Spin Motor', id: 'spin-motor', customLink: '/spin-motor' },
-        { name: 'Wash Motor', id: 'wash-motor' },
+        { name: 'Wash Motor', id: 'wash-motor', customLink: '/wash-motor' },
         { name: 'Drain Motor', id: 'drain-motor' },
       ]
     },
