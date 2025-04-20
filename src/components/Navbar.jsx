@@ -7,7 +7,14 @@ import logo from '../assets/GB_global_logo_withoutbg.png';
 
 const categories = {
   'Washing Machine': [
-    { name: 'Motor', id: 'motor' },
+    {
+      name: 'Motor',
+      id: 'motor',
+      subItems: [
+        { name: 'Spin Motor', id: 'spin-motor' },
+        { name: 'Wash Motor', id: 'wash-motor' },
+      ]
+    },
     { name: 'Gear Raja', id: 'gear-raja' },
     { name: 'Gear Xindi', id: 'gear-xindi' },
     { name: 'Timer', id: 'timer' },
@@ -82,17 +89,48 @@ export default function Navbar() {
                         <div className="rounded-xl shadow-elevated bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                           <div className="relative grid gap-1 bg-white px-5 py-6">
                             {items.map((item) => (
-                              <Link
-                                key={item.id}
-                                to={`/product/${category.toLowerCase()}/${item.id}`}
-                                className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
-                              >
-                                <div className="ml-3">
-                                  <p className="text-base font-medium text-neutral-800">
-                                    {item.name}
-                                  </p>
+                              item.subItems ? (
+                                <div key={item.id} className="relative">
+                                  <div className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out cursor-pointer group">
+                                    <div className="ml-3 flex items-center justify-between w-full">
+                                      <p className="text-base font-medium text-neutral-800">
+                                        {item.name}
+                                      </p>
+                                      <ChevronDownIcon
+                                        className="ml-2 h-4 w-4 text-neutral-400 group-hover:text-brand-500"
+                                        aria-hidden="true"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="pl-6 mt-1 space-y-1">
+                                    {item.subItems.map((subItem) => (
+                                      <Link
+                                        key={subItem.id}
+                                        to={`/product/${category.toLowerCase()}/${subItem.id}`}
+                                        className="flex items-center p-2 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
+                                      >
+                                        <div className="ml-3">
+                                          <p className="text-sm font-medium text-neutral-700">
+                                            {subItem.name}
+                                          </p>
+                                        </div>
+                                      </Link>
+                                    ))}
+                                  </div>
                                 </div>
-                              </Link>
+                              ) : (
+                                <Link
+                                  key={item.id}
+                                  to={`/product/${category.toLowerCase()}/${item.id}`}
+                                  className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
+                                >
+                                  <div className="ml-3">
+                                    <p className="text-base font-medium text-neutral-800">
+                                      {item.name}
+                                    </p>
+                                  </div>
+                                </Link>
+                              )
                             ))}
                           </div>
                         </div>
@@ -164,14 +202,35 @@ export default function Navbar() {
                 <div className="font-medium text-brand-700 mb-2 font-display">{category}</div>
                 <div className="pl-4 space-y-1">
                   {items.map((item) => (
-                    <Link
-                      key={item.id}
-                      to={`/product/${category.toLowerCase()}/${item.id}`}
-                      className="block px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
+                    item.subItems ? (
+                      <div key={item.id}>
+                        <div className="px-3 py-2 text-base font-medium text-neutral-700 flex items-center justify-between">
+                          <span>{item.name}</span>
+                          <ChevronDownIcon className="h-5 w-5 text-neutral-400" aria-hidden="true" />
+                        </div>
+                        <div className="pl-6 space-y-1 mt-1">
+                          {item.subItems.map((subItem) => (
+                            <Link
+                              key={subItem.id}
+                              to={`/product/${category.toLowerCase()}/${subItem.id}`}
+                              className="block px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <Link
+                        key={item.id}
+                        to={`/product/${category.toLowerCase()}/${item.id}`}
+                        className="block px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    )
                   ))}
                 </div>
               </div>

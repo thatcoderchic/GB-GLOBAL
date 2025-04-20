@@ -15,6 +15,32 @@ const productData = {
         'https://images.unsplash.com/photo-1621369116334-37136f8e8917?auto=format&fit=crop&q=80&w=400',
       ],
     },
+    'spin-motor': {
+      name: 'Spin Motor',
+      description: 'High-performance spin motors for washing machines',
+      features: [
+        'High RPM capability',
+        'Low noise operation',
+        'Durable construction',
+        'Energy efficient design',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1621369116334-37136f8e8917?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
+    'wash-motor': {
+      name: 'Wash Motor',
+      description: 'Reliable wash motors for all washing machine models',
+      features: [
+        'Powerful agitation',
+        'Smooth operation',
+        'Long service life',
+        'Compatible with major brands',
+      ],
+      images: [
+        'https://images.unsplash.com/photo-1621369116334-37136f8e8917?auto=format&fit=crop&q=80&w=400',
+      ],
+    },
     'gear-raja': {
       name: 'Gear Raja',
       description: 'Premium quality Gear Raja for washing machines',
