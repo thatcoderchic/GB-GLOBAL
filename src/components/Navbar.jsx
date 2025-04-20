@@ -24,7 +24,6 @@ const categories = {
     { name: 'Clutch', id: 'clutch' },
     { name: 'Spin Bellow', id: 'spin-bellow' },
     { name: 'Inlet Valve', id: 'inlet-valve' },
-    { name: 'Drain Motor', id: 'drain-motor' },
     { name: 'Pressure Switch', id: 'pressure-switch' },
   ],
   'Microwave': [
