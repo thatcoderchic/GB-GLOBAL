@@ -15,7 +15,6 @@ const categories = {
       subItems: [
         { name: 'Spin Motor', id: 'spin-motor', customLink: '/spin-motor' },
         { name: 'Wash Motor', id: 'wash-motor', customLink: '/wash-motor' },
-        { name: 'Drain Motor', id: 'drain-motor' },
       ]
     },
     {
@@ -69,6 +68,21 @@ const categories = {
     },
     // Add other folders like Washer Filter, Washer Gun, Washer Switch as needed
   ],
+  'Washing Machine Spare': [
+    {
+      name: 'Drain Motor',
+      id: 'drain-motor',
+      subItems: [
+        { name: 'Drain motor black suitable for Samsung', id: 'drain-motor-black-samsung', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor black suitable for Samsung.jpeg' },
+        { name: 'Drain motor suitable for GOD', id: 'drain-motor-god', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for GOD.jpeg' },
+        { name: 'Drain motor suitable for IFB', id: 'drain-motor-ifb', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for IFB.jpeg' },
+        { name: 'Drain motor suitable for LG', id: 'drain-motor-lg', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for LG.jpeg' },
+        { name: 'Drain motor suitable for vcon', id: 'drain-motor-vcon', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for vcon.jpeg' },
+        { name: 'Drain motor suitable for w:pool', id: 'drain-motor-wpool', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for w:pool.jpeg' },
+        { name: 'Drain motor white suitable for Samsung', id: 'drain-motor-white-samsung', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor white suitable for Samsung.jpeg' },
+      ]
+    }
+  ],
 };
 
 // Search suggestions data
@@ -86,7 +100,14 @@ const searchSuggestions = [
   { name: 'Washing Machine Motor', category: 'washing-machine', id: 'motor' },
   { name: 'Spin Motor', category: 'washing-machine', id: 'spin-motor' },
   { name: 'Wash Motor', category: 'washing-machine', id: 'wash-motor' },
-  { name: 'Drain Motor', category: 'washing-machine', id: 'drain-motor' },
+  // Drain Motor images
+  { name: 'Drain motor black suitable for Samsung', category: 'washing-machine-spare', id: 'drain-motor-black-samsung' },
+  { name: 'Drain motor suitable for GOD', category: 'washing-machine-spare', id: 'drain-motor-god' },
+  { name: 'Drain motor suitable for IFB', category: 'washing-machine-spare', id: 'drain-motor-ifb' },
+  { name: 'Drain motor suitable for LG', category: 'washing-machine-spare', id: 'drain-motor-lg' },
+  { name: 'Drain motor suitable for vcon', category: 'washing-machine-spare', id: 'drain-motor-vcon' },
+  { name: 'Drain motor suitable for w:pool', category: 'washing-machine-spare', id: 'drain-motor-wpool' },
+  { name: 'Drain motor white suitable for Samsung', category: 'washing-machine-spare', id: 'drain-motor-white-samsung' },
   // Gear products
   { name: 'Gear Raja', category: 'washing-machine', id: 'gear-raja' },
   { name: 'Gear Xindi', category: 'washing-machine', id: 'gear-xindi' },
