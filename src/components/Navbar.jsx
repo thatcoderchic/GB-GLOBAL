@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Popover, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
@@ -26,6 +26,7 @@ const categories = {
         { name: 'Gear Box Xindi', id: 'gear-box-xindi' },
       ]
     },
+    { name: 'Door Lock', id: 'door-lock', customLink: '/door-lock' },
     { name: 'Timer', id: 'timer' },
     { name: 'Clutch', id: 'clutch' },
     { name: 'Spin Bellow', id: 'spin-bellow' },
@@ -39,21 +40,126 @@ const categories = {
     { name: 'Fuse', id: 'fuse' },
   ],
   'Car Washer': [
-    { name: 'Washer', id: 'washer' },
-    { name: 'Head', id: 'head' },
-    { name: 'Pipe', id: 'pipe' },
-    { name: 'Adopter', id: 'adopter' },
+    {
+      name: 'Washer',
+      id: 'washer',
+      subItems: [
+        { name: "Car washer 2701", id: "car-washer-2701", image: "/GBPICS/Car washer/Washer/Car washer 2701.jpeg" },
+        // Add more washer images as needed
+      ]
+    },
+    {
+      name: 'Adopter',
+      id: 'adopter',
+      subItems: [
+        { name: "Washer's clear adopter", id: "clear-adopter", image: "/GBPICS/Car washer/Adopter/Washer's clear adopter.jpeg" },
+        { name: "Washer's quick adopter", id: "quick-adopter", image: "/GBPICS/Car washer/Adopter/Washer's quick adopter.jpeg" },
+      ]
+    },
+    {
+      name: 'Pipe',
+      id: 'pipe',
+      subItems: [
+        { name: "Washer's pipe 05 mtr", id: "pipe-05mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe 05 mtr.jpeg" },
+        { name: "Washer's pipe 08 mtr", id: "pipe-08mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe 08 mtr.jpeg" },
+        { name: "Washer's pipe black heavy 07 mtr", id: "pipe-black-heavy-07mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe black heavy 07 mtr.jpeg" },
+        { name: "Washer's pipe normal 05 mtr", id: "pipe-normal-05mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe normal 05 mtr.jpeg" },
+        { name: "Washer's pipe small hole", id: "pipe-small-hole", image: "/GBPICS/Car washer/Pipe/Washer's pipe small hole.jpeg" },
+      ]
+    },
+    // Add other folders like Washer Filter, Washer Gun, Washer Switch as needed
   ],
 };
 
+// Search suggestions data
+const searchSuggestions = [
+  // Door Lock products
+  { name: 'Black Big Door Lock for LG', category: 'washing-machine', id: 'black-big-door-lock-lg' },
+  { name: 'Door Lock IFB', category: 'washing-machine', id: 'door-lock-ifb' },
+  { name: 'Door Lock for LG', category: 'washing-machine', id: 'door-lock-lg' },
+  { name: 'Door Lock for SS', category: 'washing-machine', id: 'door-lock-ss' },
+  { name: 'Red Dori Door Lock for LG', category: 'washing-machine', id: 'red-dori-door-lock-lg' },
+  { name: 'White Door Lock for LG', category: 'washing-machine', id: 'white-door-lock-lg' },
+  { name: 'Blue Single DC Inlet Valve for LG', category: 'washing-machine', id: 'blue-single-dc-inlet-valve-lg' },
+  { name: 'Grey Double Long Inlet Valve for LG', category: 'washing-machine', id: 'grey-double-long-inlet-valve-lg' },
+  // Motor products
+  { name: 'Washing Machine Motor', category: 'washing-machine', id: 'motor' },
+  { name: 'Spin Motor', category: 'washing-machine', id: 'spin-motor' },
+  { name: 'Wash Motor', category: 'washing-machine', id: 'wash-motor' },
+  { name: 'Drain Motor', category: 'washing-machine', id: 'drain-motor' },
+  // Gear products
+  { name: 'Gear Raja', category: 'washing-machine', id: 'gear-raja' },
+  { name: 'Gear Xindi', category: 'washing-machine', id: 'gear-xindi' },
+  { name: 'Gear Box RAJA', category: 'washing-machine', id: 'gear-box-raja' },
+  { name: 'Gear Box Xindi', category: 'washing-machine', id: 'gear-box-xindi' },
+  // Other washing machine parts
+  { name: 'Timer', category: 'washing-machine', id: 'timer' },
+  { name: 'Clutch', category: 'washing-machine', id: 'clutch' },
+  { name: 'Spin Bellow', category: 'washing-machine', id: 'spin-bellow' },
+  { name: 'Inlet Valve', category: 'washing-machine', id: 'inlet-valve' },
+  { name: 'Pressure Switch', category: 'washing-machine', id: 'pressure-switch' },
+  // Microwave parts
+  { name: 'Microwave Magnatron', category: 'microwave', id: 'magnatron' },
+  { name: 'Microwave Transformer', category: 'microwave', id: 'transformer' },
+  { name: 'Microwave Glass Tray', category: 'microwave', id: 'glass-tray' },
+  { name: 'Microwave Fuse', category: 'microwave', id: 'fuse' },
+  // Car washer parts
+  { name: 'Car Washer', category: 'car-washer', id: 'washer' },
+  { name: 'Car Washer Head', category: 'car-washer', id: 'head' },
+  { name: 'Car Washer Pipe', category: 'car-washer', id: 'pipe' },
+  { name: 'Car Washer Adopter', category: 'car-washer', id: 'adopter' },
+];
+
 export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
+  const searchRef = useRef(null);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/?search=${encodeURIComponent(searchQuery)}`);
+    if (searchQuery.trim()) {
+      navigate(`/?search=${encodeURIComponent(searchQuery)}`);
+      setShowSuggestions(false);
+    }
   };
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    if (query.length > 0) {
+      const filtered = searchSuggestions.filter(item =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 5); // Show max 5 suggestions
+      setSuggestions(filtered);
+      setShowSuggestions(true);
+    } else {
+      setSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setSearchQuery(suggestion.name);
+    setShowSuggestions(false);
+    navigate(`/?search=${encodeURIComponent(suggestion.name)}`);
+  };
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -128,8 +234,15 @@ export default function Navbar() {
                                             to={subItem.customLink || `/product/${category.toLowerCase()}/${subItem.id}`}
                                             className="flex items-center px-4 py-2 hover:bg-brand-50 transition duration-150 ease-in-out"
                                           >
-
-                                            <div className="ml-3">
+                                            {subItem.image && (
+                                              <img
+                                                src={subItem.image}
+                                                alt={subItem.name}
+                                                className="h-8 w-8 object-cover rounded mr-3 border"
+                                                style={{ minWidth: 32 }}
+                                              />
+                                            )}
+                                            <div>
                                               <p className="text-sm font-medium text-neutral-700">
                                                 {subItem.name}
                                               </p>
@@ -143,7 +256,7 @@ export default function Navbar() {
                               ) : (
                                 <Link
                                   key={item.id}
-                                  to={`/product/${category.toLowerCase()}/${item.id}`}
+                                  to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
                                   className="flex items-center p-3 rounded-lg hover:bg-brand-50 transition duration-150 ease-in-out"
                                 >
 
@@ -167,18 +280,36 @@ export default function Navbar() {
 
           {/* Search form */}
           <div className="hidden md:flex md:items-center">
-            <form onSubmit={handleSearch} className="flex">
+            <form onSubmit={handleSearch} className="flex relative" ref={searchRef}>
               <div className="relative rounded-md shadow-sm">
                 <input
                   type="search"
                   placeholder="Search products..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={handleSearchChange}
+                  onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
                   className="block w-full pl-4 pr-10 py-2 border border-neutral-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition duration-150 ease-in-out"
                 />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <MagnifyingGlassIcon className="h-5 w-5 text-neutral-400" aria-hidden="true" />
                 </div>
+
+                {/* Search Suggestions Dropdown */}
+                {showSuggestions && suggestions.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-neutral-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                    {suggestions.map((suggestion, index) => (
+                      <button
+                        key={index}
+                        type="button"
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        className="w-full text-left px-4 py-2 hover:bg-brand-50 focus:bg-brand-50 focus:outline-none transition duration-150 ease-in-out border-b border-neutral-100 last:border-b-0"
+                      >
+                        <div className="text-sm font-medium text-neutral-800">{suggestion.name}</div>
+                        <div className="text-xs text-neutral-500 capitalize">{suggestion.category.replace('-', ' ')}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <button
                 type="submit"
@@ -239,7 +370,14 @@ export default function Navbar() {
                               className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-
+                              {subItem.image && (
+                                <img
+                                  src={subItem.image}
+                                  alt={subItem.name}
+                                  className="h-6 w-6 object-cover rounded mr-2 border inline-block"
+                                  style={{ minWidth: 24 }}
+                                />
+                              )}
                               {subItem.name}
                             </Link>
                           ))}
@@ -248,7 +386,7 @@ export default function Navbar() {
                     ) : (
                       <Link
                         key={item.id}
-                        to={`/product/${category.toLowerCase()}/${item.id}`}
+                        to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
                         className="flex items-center px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                         onClick={() => setMobileMenuOpen(false)}
                       >
@@ -267,7 +405,7 @@ export default function Navbar() {
                 type="search"
                 placeholder="Search products..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={handleSearchChange}
                 className="flex-1 px-4 py-2 border border-r-0 border-neutral-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition duration-150 ease-in-out"
               />
               <button

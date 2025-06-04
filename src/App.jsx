@@ -5,6 +5,7 @@ import ProductDetails from './pages/ProductDetails';
 import GearBoxRaja from './pages/GearBoxRaja';
 import SpinMotor from './pages/SpinMotor';
 import WashMotor from './pages/WashMotor';
+import DoorLock from './pages/DoorLock';
 import Footer from './components/Footer';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/gearbox-raja" element={<GearBoxRaja />} />
             <Route path="/spin-motor" element={<SpinMotor />} />
             <Route path="/wash-motor" element={<WashMotor />} />
+            <Route path="/door-lock" element={<DoorLock />} />
           </Routes>
         </main>
         <Footer />

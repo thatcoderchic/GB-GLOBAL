@@ -138,12 +138,7 @@ export default function SpinMotor() {
                   <p className="mt-2 text-sm text-neutral-600">
                     Premium quality spare part
                   </p>
-                  <div className="mt-4 flex items-center text-sm text-brand-600 font-medium">
-                    <span>Request Information</span>
-                    <svg className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-150 ease-in-out" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
+
                 </div>
               </div>
             ))}
@@ -160,7 +155,7 @@ export default function SpinMotor() {
               Our spin motors are designed for durability, efficiency, and reliable performance
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-card">
               <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
@@ -173,7 +168,7 @@ export default function SpinMotor() {
                 Our motors are designed to consume less power while delivering optimal performance.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-card">
               <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
                 <svg className="h-6 w-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -185,7 +180,7 @@ export default function SpinMotor() {
                 Built with high-quality materials to ensure extended service life and reliability.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-xl shadow-card">
               <div className="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
                 <svg className="h-6 w-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -218,48 +213,7 @@ export default function SpinMotor() {
               </button>
             </div>
           </div>
-          <div className="mt-12 lg:mt-0">
-            <div className="bg-white rounded-xl shadow-elevated p-8">
-              <h3 className="text-xl font-semibold text-neutral-800 mb-4">Request Information</h3>
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="block w-full px-4 py-3 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition duration-150 ease-in-out"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="block w-full px-4 py-3 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition duration-150 ease-in-out"
-                    placeholder="Your email"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">Message</label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="block w-full px-4 py-3 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition duration-150 ease-in-out"
-                    placeholder="Tell us what you need"
-                  ></textarea>
-                </div>
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors duration-150 ease-in-out"
-                  >
-                    Send Request
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

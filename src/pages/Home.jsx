@@ -120,6 +120,63 @@ const allProducts = [
     name: 'Car Washer Adopter',
     description: 'Universal adopters for car washer connections',
     image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+  },
+  // Door Lock products
+  {
+    category: 'washing-machine',
+    id: 'black-big-door-lock-lg',
+    name: 'Black Big Door Lock for LG',
+    description: 'Premium black door lock specifically designed for LG washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Black Big Door lock for LG.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'door-lock-ifb',
+    name: 'Door Lock IFB',
+    description: 'High-quality door lock compatible with IFB washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Door Lock IFB.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'door-lock-lg',
+    name: 'Door Lock for LG',
+    description: 'Reliable door lock replacement for LG washing machine models',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Door Lock for LG.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'door-lock-ss',
+    name: 'Door Lock for SS',
+    description: 'Durable door lock designed for SS washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Door Lock for SS.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'red-dori-door-lock-lg',
+    name: 'Red Dori Door Lock for LG',
+    description: 'Red Dori style door lock for LG washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Red Dori Door lock for LG.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'white-door-lock-lg',
+    name: 'White Door Lock for LG',
+    description: 'White door lock replacement for LG washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/White Door Lock for LG.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'blue-single-dc-inlet-valve-lg',
+    name: 'Blue Single DC Inlet Valve for LG',
+    description: 'Blue single DC inlet valve for LG washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Blue Single DC Inlet Valve for LG.jpeg',
+  },
+  {
+    category: 'washing-machine',
+    id: 'grey-double-long-inlet-valve-lg',
+    name: 'Grey Double Long Inlet Valve for LG',
+    description: 'Grey double long inlet valve for LG washing machines',
+    image: '/GBPICS/Washing Machine spare pic/Door Lock/Grey Double Long Inlet Valve for LG.jpeg',
   }
   // Add more products here as needed
 ];
