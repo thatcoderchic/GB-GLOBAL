@@ -339,23 +339,31 @@ export default function ProductDetails() {
                 </div>
               </div>
 
-              <div className="mt-10 border-t border-neutral-200 pt-8">
-                <h3 className="text-lg font-medium text-neutral-800 font-display">Additional Information</h3>
-                <p className="mt-4 text-neutral-700">
-                  For detailed specifications, availability, and compatibility information,
-                  please contact our support team.
-                </p>
-                <div className="mt-6 flex space-x-4">
-                  <button className="flex-1 bg-brand-600 text-white px-6 py-3 rounded-lg hover:bg-brand-700 transition duration-150 ease-in-out font-medium shadow-sm">
-                    Request Information
-                  </button>
-                  <button className="flex items-center justify-center px-4 py-3 border border-neutral-300 rounded-lg text-neutral-700 bg-white hover:bg-neutral-50 transition duration-150 ease-in-out">
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
-                    </svg>
+                <div className="mt-10 border-t border-neutral-200 pt-8">
+                  <h3 className="text-lg font-medium text-neutral-800 font-display">Additional Information</h3>
+                  <p className="mt-4 text-neutral-700">
+                    For detailed specifications, availability, and compatibility information,
+                    please contact our support team.
+                  </p>
+                  <div className="mt-6 flex space-x-4">
+                    <button className="flex-1 bg-brand-600 text-white px-6 py-3 rounded-lg hover:bg-brand-700 transition duration-150 ease-in-out font-medium shadow-sm">
+                      Request Information
+                    </button>
+                    <button className="flex items-center justify-center px-4 py-3 border border-neutral-300 rounded-lg text-neutral-700 bg-white hover:bg-neutral-50 transition duration-150 ease-in-out">
+                      <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <button
+                    onClick={() => window.history.back()}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors duration-150 ease-in-out"
+                  >
+                    &larr; Back to Home
                   </button>
                 </div>
-              </div>
             </div>
           </div>
         </div>
