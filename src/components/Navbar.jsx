@@ -92,6 +92,7 @@ const categories = {
     {
       name: 'Gear Box Xindi',
       id: 'gear-box-xindi',
+      customLink: '/gear-box-xindi',
       subItems: [
         { name: 'Gear box 01 xinde', id: 'gear-box-01-xinde', image: '/GBPICS/Washing Machine spare pic/Gear Box/Gearbox-Xinde/Gear box 01 xinde.jpeg' },
         { name: 'Gear box 02 xinde', id: 'gear-box-02-xinde', image: '/GBPICS/Washing Machine spare pic/Gear Box/Gearbox-Xinde/Gear box 02 xinde.jpeg' },
@@ -142,6 +143,7 @@ const categories = {
     {
       name: 'Timer',
       id: 'timer',
+      customLink: '/timer',
       subItems: [
         { name: 'LG 10 min', id: 'lg-10-min', image: '/GBPICS/Washing Machine spare pic/Timer/ LG 10 min.jpeg' },
         { name: 'haier 35 min 8 wire', id: 'haier-35-min-8-wire', image: '/GBPICS/Washing Machine spare pic/Timer/ haier 35 min 8 wire.jpeg' },
@@ -174,10 +176,11 @@ const categories = {
         { name: 'w:pool 6067', id: 'wpool-6067', image: '/GBPICS/Washing Machine spare pic/Timer/w:pool 6067.jpeg' },
       ]
     },
-    { name: 'Clutch', id: 'clutch' },
+    { name: 'Clutch', id: 'clutch', customLink: '/clutch' },
     {
       name: 'Spin Bellow',
       id: 'spin-bellow',
+      customLink: '/spin-bellow',
       subItems: [
         { name: 'Bellow suitable for 8700 models', id: 'bellow-8700-models', image: '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for 8700 models.jpeg' },
         { name: 'Bellow suitable for LG 7 kg with ring', id: 'bellow-lg-7kg-ring', image: '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for LG 7 kg with ring.jpeg' },
@@ -190,6 +193,7 @@ const categories = {
     {
       name: 'Inlet Valve',
       id: 'inlet-valve',
+      customLink: '/inlet-valve',
       subItems: [
         { name: 'Double Inlet Valve for SS', id: 'double-inlet-valve-ss', image: '/GBPICS/Washing Machine spare pic/Inlet Valve/ Double Inlet Valve for SS.jpeg' },
         { name: 'Blue Red Double DC Inlet Valve for LG', id: 'blue-red-double-dc-inlet-valve-lg', image: '/GBPICS/Washing Machine spare pic/Inlet Valve/Blue Red Double DC Inlet Valvue for LG.jpeg' },
@@ -213,6 +217,7 @@ const categories = {
     {
       name: 'Pressure Switch',
       id: 'pressure-switch',
+      customLink: '/pressure-switch',
       subItems: [
         { name: 'Pressure sensor suitable for LG', id: 'pressure-sensor-lg', image: '/GBPICS/Washing Machine spare pic/Pressure Switch/Pressure sensor suitable for LG.jpeg' },
         { name: 'Pressure sensors suitable for Samsung', id: 'pressure-sensors-samsung', image: '/GBPICS/Washing Machine spare pic/Pressure Switch/Pressure sensors suitable for Samsung.jpeg' },
@@ -221,6 +226,7 @@ const categories = {
     {
       name: 'Drain Motor',
       id: 'drain-motor',
+      customLink: '/drain-motor',
       subItems: [
         { name: 'Drain motor black suitable for Samsung', id: 'drain-motor-black-samsung', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor black suitable for Samsung.jpeg' },
         { name: 'Drain motor suitable for GOD', id: 'drain-motor-god', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor suitable for GOD.jpeg' },
@@ -231,10 +237,12 @@ const categories = {
         { name: 'Drain motor white suitable for Samsung', id: 'drain-motor-white-samsung', image: '/GBPICS/Washing Machine spare pic/Drain Motor/Drain motor white suitable for Samsung.jpeg' },
       ]
     },
+  ],
   'Microwave': [
     {
       name: 'Magnetron',
       id: 'magnetron',
+      customLink: '/magnetron',
       subItems: [
         { name: 'Magnetron 210 witol', id: 'magnetron-210-witol', image: '/GBPICS/Microwave spare pic/Magnetron/Magnetron 210 witol.jpeg' },
         { name: 'Magnetron 213 witol', id: 'magnetron-213-witol', image: '/GBPICS/Microwave spare pic/Magnetron/Magnetron 213 witol.jpeg' },
@@ -248,6 +256,7 @@ const categories = {
     {
       name: 'Transformer',
       id: 'transformer',
+      customLink: '/transformer',
       subItems: [
         { name: 'Micro Transformers', id: 'micro-transformers', image: '/GBPICS/Microwave spare pic/Transformer/Micro Transformers.jpeg' },
         { name: 'Micro transformer for oven micro', id: 'micro-transformer-oven', image: '/GBPICS/Microwave spare pic/Transformer/Micro transformer for oven micro.jpeg' },
@@ -256,13 +265,14 @@ const categories = {
     {
       name: 'Glass Tray',
       id: 'glass-tray',
+      customLink: '/glass-tray',
       subItems: [
         { name: 'Glass tray 12.5 inches', id: 'glass-tray-12-5-inches', image: '/GBPICS/Microwave spare pic/Glass Tray/Glass tray 12.5 inches.jpeg' },
         { name: 'Glass tray suitable for LG 9 inch plain', id: 'glass-tray-lg-9-inch', image: '/GBPICS/Microwave spare pic/Glass Tray/Glass tray suitable for LG 9 inchi plain.jpeg' },
         { name: 'Glass tray suitable for Samsung 10.5 inches', id: 'glass-tray-samsung-10-5-inches', image: '/GBPICS/Microwave spare pic/Glass Tray/Glass tray suitable for Samsung 10.5 inches.jpeg' },
       ]
     },
-    { name: 'Fuse', id: 'fuse' },
+    { name: 'Fuse', id: 'fuse', customLink: '/fuse' },
   ],
   'Car Washer': [
     {
@@ -270,15 +280,17 @@ const categories = {
       id: 'washer',
       subItems: [
         { name: "Car washer 2701", id: "car-washer-2701", image: "/GBPICS/Car washer/Washer/Car washer 2701.jpeg" },
-        // Add more washer images as needed
+        { name: "Car washer adjustable", id: "car-washer-adjustable", image: "/GBPICS/Car washer/Washer/Car washer adjustable.jpeg" },
+        { name: "Car washer bullet", id: "car-washer-bullet", image: "/GBPICS/Car washer/Washer/Car washer bullet.jpeg" },
+        { name: "Car washer raja", id: "car-washer-raja", image: "/GBPICS/Car washer/Washer/Car washer raja.jpeg" },
       ]
     },
     {
       name: 'Adopter',
       id: 'adopter',
       subItems: [
-        { name: "Washer's clear adopter", id: "clear-adopter", image: "/GBPICS/Car washer/Adopter/Washer's clear adopter.jpeg" },
-        { name: "Washer's quick adopter", id: "quick-adopter", image: "/GBPICS/Car washer/Adopter/Washer's quick adopter.jpeg" },
+        { name: "Washer's clear adopter", id: "clear-adopter", image: "/GBPICS/Car washer/Adopter /Washer's clear adopter.jpeg" },
+        { name: "Washer's quick adopter", id: "quick-adopter", image: "/GBPICS/Car washer/Adopter /Washer's quick adopter.jpeg" },
       ]
     },
     {
@@ -292,7 +304,30 @@ const categories = {
         { name: "Washer's pipe small hole", id: "pipe-small-hole", image: "/GBPICS/Car washer/Pipe/Washer's pipe small hole.jpeg" },
       ]
     },
-    // Add other folders like Washer Filter, Washer Gun, Washer Switch as needed
+    {
+      name: 'Washer Filter',
+      id: 'washer-filter',
+      subItems: [
+        { name: "Washer's black filter", id: "washer-black-filter", image: "/GBPICS/Car washer/Washer Filter/Washer's black filter.jpeg" },
+      ]
+    },
+    {
+      name: 'Washer Gun',
+      id: 'washer-gun',
+      subItems: [
+        { name: "Washer gun 360 plastic", id: "washer-gun-360-plastic", image: "/GBPICS/Car washer/Washer Gun/Washer gun 360 plastic.jpeg" },
+        { name: "Washer gun", id: "washer-gun", image: "/GBPICS/Car washer/Washer Gun/Washer gun.jpeg" },
+        { name: "Washer metal gun 360", id: "washer-metal-gun-360", image: "/GBPICS/Car washer/Washer Gun/Washer metal gun 360.jpeg" },
+        { name: "Washer's gun small thread hole", id: "washer-gun-small-thread-hole", image: "/GBPICS/Car washer/Washer Gun/Washer's gun small thread hole.jpeg" },
+      ]
+    },
+    {
+      name: 'Washer Switch',
+      id: 'washer-switch',
+      subItems: [
+        { name: "Washer's switch", id: "washer-switch", image: "/GBPICS/Car washer/Washer Switch/Washer's switch.jpeg" },
+      ]
+    },
   ],
 
 };
@@ -515,17 +550,40 @@ const searchSuggestions = [
 
   // Car washer parts
   { name: 'Car Washer', category: 'car-washer', id: 'washer' },
-  { name: 'Car Washer Head', category: 'car-washer', id: 'head' },
   { name: 'Car Washer Pipe', category: 'car-washer', id: 'pipe' },
   { name: 'Car Washer Adopter', category: 'car-washer', id: 'adopter' },
+  { name: 'Car Washer Filter', category: 'car-washer', id: 'washer-filter' },
+  { name: 'Car Washer Gun', category: 'car-washer', id: 'washer-gun' },
+  { name: 'Car Washer Switch', category: 'car-washer', id: 'washer-switch' },
+
+  // Car Washer products
   { name: "Car washer 2701", category: 'car-washer', id: "car-washer-2701" },
+  { name: "Car washer adjustable", category: 'car-washer', id: "car-washer-adjustable" },
+  { name: "Car washer bullet", category: 'car-washer', id: "car-washer-bullet" },
+  { name: "Car washer raja", category: 'car-washer', id: "car-washer-raja" },
+
+  // Car Washer Adopter products
   { name: "Washer's clear adopter", category: 'car-washer', id: "clear-adopter" },
   { name: "Washer's quick adopter", category: 'car-washer', id: "quick-adopter" },
+
+  // Car Washer Pipe products
   { name: "Washer's pipe 05 mtr", category: 'car-washer', id: "pipe-05mtr" },
   { name: "Washer's pipe 08 mtr", category: 'car-washer', id: "pipe-08mtr" },
   { name: "Washer's pipe black heavy 07 mtr", category: 'car-washer', id: "pipe-black-heavy-07mtr" },
   { name: "Washer's pipe normal 05 mtr", category: 'car-washer', id: "pipe-normal-05mtr" },
   { name: "Washer's pipe small hole", category: 'car-washer', id: "pipe-small-hole" },
+
+  // Car Washer Filter products
+  { name: "Washer's black filter", category: 'car-washer', id: "washer-black-filter" },
+
+  // Car Washer Gun products
+  { name: "Washer gun 360 plastic", category: 'car-washer', id: "washer-gun-360-plastic" },
+  { name: "Washer gun", category: 'car-washer', id: "washer-gun" },
+  { name: "Washer metal gun 360", category: 'car-washer', id: "washer-metal-gun-360" },
+  { name: "Washer's gun small thread hole", category: 'car-washer', id: "washer-gun-small-thread-hole" },
+
+  // Car Washer Switch products
+  { name: "Washer's switch", category: 'car-washer', id: "washer-switch" },
 ];
 
 export default function Navbar() {
@@ -652,14 +710,6 @@ export default function Navbar() {
                                             to={subItem.customLink || `/product/${category.toLowerCase()}/${subItem.id}`}
                                             className="flex items-center px-4 py-2 hover:bg-brand-50 transition duration-150 ease-in-out"
                                           >
-                                            {subItem.image && (
-                                              <img
-                                                src={subItem.image}
-                                                alt={subItem.name}
-                                                className="h-8 w-8 object-cover rounded mr-3 border"
-                                                style={{ minWidth: 32 }}
-                                              />
-                                            )}
                                             <div>
                                               <p className="text-sm font-medium text-neutral-700">
                                                 {subItem.name}
@@ -788,14 +838,6 @@ export default function Navbar() {
                               className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
-                              {subItem.image && (
-                                <img
-                                  src={subItem.image}
-                                  alt={subItem.name}
-                                  className="h-6 w-6 object-cover rounded mr-2 border inline-block"
-                                  style={{ minWidth: 24 }}
-                                />
-                              )}
                               {subItem.name}
                             </Link>
                           ))}
