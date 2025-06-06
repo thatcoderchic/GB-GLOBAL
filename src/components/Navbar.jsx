@@ -278,6 +278,7 @@ const categories = {
     {
       name: 'Washer',
       id: 'washer',
+      customLink: '/car-washer',
       subItems: [
         { name: "Car washer 2701", id: "car-washer-2701", image: "/GBPICS/Car washer/Washer/Car washer 2701.jpeg" },
         { name: "Car washer adjustable", id: "car-washer-adjustable", image: "/GBPICS/Car washer/Washer/Car washer adjustable.jpeg" },
@@ -707,7 +708,7 @@ export default function Navbar() {
                                         {item.subItems.map((subItem) => (
                                           <Link
                                             key={subItem.id}
-                                            to={subItem.customLink || `/product/${category.toLowerCase()}/${subItem.id}`}
+                                            to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
                                             className="flex items-center px-4 py-2 hover:bg-brand-50 transition duration-150 ease-in-out"
                                           >
                                             <div>
@@ -834,7 +835,7 @@ export default function Navbar() {
                           {item.subItems.map((subItem) => (
                             <Link
                               key={subItem.id}
-                              to={subItem.customLink || `/product/${category.toLowerCase()}/${subItem.id}`}
+                              to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
                               className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
