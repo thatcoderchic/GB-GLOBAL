@@ -1,4 +1,5 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const productData = {
   'washing-machine': {
@@ -77,7 +78,12 @@ const productData = {
         'Long-lasting durability',
       ],
       images: [
-        'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+        '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for 8700 models.jpeg',
+        '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for LG 7 kg with ring.jpeg',
+        '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for LG 9 kg.jpeg',
+        '/GBPICS/Washing Machine spare pic/Bellow/Bellow suitable for samsung 8 kg models.jpeg',
+        '/GBPICS/Washing Machine spare pic/Bellow/Suitable bellow for small universal big bush.jpeg',
+        '/GBPICS/Washing Machine spare pic/Bellow/Suitable for all models multi bellow.jpeg',
       ],
     },
     'inlet-valve': {
@@ -233,6 +239,7 @@ const productData = {
 export default function ProductDetails() {
   const { category, id } = useParams();
   const product = productData[category]?.[id];
+  const [mainImage, setMainImage] = useState(product?.images?.[0] || '');
 
   if (!product) {
     return (
@@ -272,7 +279,7 @@ export default function ProductDetails() {
                   <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
                 </svg>
                 <Link to="#" className="ml-2 text-neutral-500 hover:text-brand-600 transition-colors duration-150 ease-in-out">
-                  {category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ')}
+                  {category.charAt(0).toUpperCase() + category.slice(1).replace(/-/g, ' ')}
                 </Link>
               </div>
             </li>
@@ -296,10 +303,27 @@ export default function ProductDetails() {
             <div className="lg:col-span-1 lg:border-r lg:border-neutral-200">
               <div className="aspect-w-1 aspect-h-1 bg-neutral-100">
                 <img
-                  src={product.images[0]}
+                  src={mainImage}
                   alt={product.name}
                   className="w-full h-full object-center object-cover"
                 />
+              </div>
+              <div className="mt-4 flex space-x-4 overflow-x-auto">
+                {product.images.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setMainImage(img)}
+                    className={`border-2 rounded-md focus:outline-none ${
+                      img === mainImage ? 'border-brand-600' : 'border-transparent'
+                    }`}
+                  >
+                    <img
+                      src={img}
+                      alt={`${product.name} thumbnail ${index + 1}`}
+                      className="h-20 w-20 object-cover rounded-md"
+                    />
+                  </button>
+                ))}
               </div>
             </div>
 
