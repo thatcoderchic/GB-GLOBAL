@@ -17,6 +17,12 @@ import Magnetron from './pages/Magnetron';
 import Transformer from './pages/Transformer';
 import GlassTray from './pages/GlassTray';
 import Fuse from './pages/Fuse';
+import CarWasher from './pages/CarWasher';
+import CarWasherAdopter from './pages/CarWasherAdopter';
+import CarWasherPipe from './pages/CarWasherPipe';
+import CarWasherFilter from './pages/CarWasherFilter';
+import CarWasherGun from './pages/CarWasherGun';
+import CarWasherSwitch from './pages/CarWasherSwitch';
 import Footer from './components/Footer';
 
 function App() {
@@ -43,6 +49,12 @@ function App() {
             <Route path="/transformer" element={<Transformer />} />
             <Route path="/glass-tray" element={<GlassTray />} />
             <Route path="/fuse" element={<Fuse />} />
+            <Route path="/car-washer" element={<CarWasher />} />
+            <Route path="/car-washer-adopter" element={<CarWasherAdopter />} />
+            <Route path="/car-washer-pipe" element={<CarWasherPipe />} />
+            <Route path="/car-washer-filter" element={<CarWasherFilter />} />
+            <Route path="/car-washer-gun" element={<CarWasherGun />} />
+            <Route path="/car-washer-switch" element={<CarWasherSwitch />} />
           </Routes>
         </main>
         <Footer />

@@ -289,6 +289,7 @@ const categories = {
     {
       name: 'Adopter',
       id: 'adopter',
+      customLink: '/car-washer-adopter',
       subItems: [
         { name: "Washer's clear adopter", id: "clear-adopter", image: "/GBPICS/Car washer/Adopter /Washer's clear adopter.jpeg" },
         { name: "Washer's quick adopter", id: "quick-adopter", image: "/GBPICS/Car washer/Adopter /Washer's quick adopter.jpeg" },
@@ -297,6 +298,7 @@ const categories = {
     {
       name: 'Pipe',
       id: 'pipe',
+      customLink: '/car-washer-pipe',
       subItems: [
         { name: "Washer's pipe 05 mtr", id: "pipe-05mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe 05 mtr.jpeg" },
         { name: "Washer's pipe 08 mtr", id: "pipe-08mtr", image: "/GBPICS/Car washer/Pipe/Washer's pipe 08 mtr.jpeg" },
@@ -308,6 +310,7 @@ const categories = {
     {
       name: 'Washer Filter',
       id: 'washer-filter',
+      customLink: '/car-washer-filter',
       subItems: [
         { name: "Washer's black filter", id: "washer-black-filter", image: "/GBPICS/Car washer/Washer Filter/Washer's black filter.jpeg" },
       ]
@@ -315,6 +318,7 @@ const categories = {
     {
       name: 'Washer Gun',
       id: 'washer-gun',
+      customLink: '/car-washer-gun',
       subItems: [
         { name: "Washer gun 360 plastic", id: "washer-gun-360-plastic", image: "/GBPICS/Car washer/Washer Gun/Washer gun 360 plastic.jpeg" },
         { name: "Washer gun", id: "washer-gun", image: "/GBPICS/Car washer/Washer Gun/Washer gun.jpeg" },
@@ -325,6 +329,7 @@ const categories = {
     {
       name: 'Washer Switch',
       id: 'washer-switch',
+      customLink: '/car-washer-switch',
       subItems: [
         { name: "Washer's switch", id: "washer-switch", image: "/GBPICS/Car washer/Washer Switch/Washer's switch.jpeg" },
       ]
