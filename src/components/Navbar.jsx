@@ -664,6 +664,7 @@ export default function Navbar() {
                   <>
                     <Popover.Button
                       className={`group inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition duration-200 ease-in-out ${open ? 'text-brand-700 bg-brand-50' : 'text-neutral-600 hover:text-brand-600 hover:bg-brand-50'}`}
+                      data-category={category.toLowerCase().replace(' ', '-')}
                     >
                       <span>{category}</span>
                       <ChevronDownIcon

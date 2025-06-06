@@ -24,6 +24,7 @@ import CarWasherFilter from './pages/CarWasherFilter';
 import CarWasherGun from './pages/CarWasherGun';
 import CarWasherSwitch from './pages/CarWasherSwitch';
 import Footer from './components/Footer';
+import './styles/animations.css';
 
 function App() {
   return (

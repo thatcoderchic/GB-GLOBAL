@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 const allProducts = [
   {
@@ -201,43 +202,137 @@ export default function Home() {
   const categories = [
     {
       title: 'Washing Machine Spares',
-      description: 'Quality parts for all major washing machine brands',
-      image: 'https://images.unsplash.com/photo-1610557892470-55d587a6e7b4?auto=format&fit=crop&q=80&w=400',
+      description: 'Quality parts for all major washing machine brands including motors, gears, timers, and more',
+      image: '/GBPICS/Washing Machine spare pic/Motor/Spin Motor/Motor spin 01.jpeg',
+      id: 'washing-machine',
+      itemCount: '50+ Products',
     },
     {
       title: 'Microwave Spares',
-      description: 'Reliable components for microwave repair',
-      image: 'https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?auto=format&fit=crop&q=80&w=400',
+      description: 'Reliable components for microwave repair including magnetrons, transformers, and glass trays',
+      image: '/GBPICS/Microwave spare pic/Magnetron/Magnetron 210 witol.jpeg',
+      id: 'microwave',
+      itemCount: '15+ Products',
     },
     {
       title: 'Car Washer Parts',
-      description: 'High-quality components for car washers',
-      image: 'https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&q=80&w=400',
+      description: 'High-quality components for car washers including guns, pipes, filters, and adopters',
+      image: '/GBPICS/Car washer/Washer Gun/Washer gun.jpeg',
+      id: 'car-washer',
+      itemCount: '20+ Products',
     },
   ];
+
+  // Function to trigger navbar dropdown programmatically
+  const handleExploreCategory = (categoryId) => {
+    // Add visual feedback
+    const clickedElement = document.querySelector(`[data-category-card="${categoryId}"]`);
+    if (clickedElement) {
+      clickedElement.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        clickedElement.style.transform = '';
+      }, 150);
+    }
+
+    // Scroll to top first
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Wait for scroll to complete, then trigger dropdown
+    setTimeout(() => {
+      const navbarButton = document.querySelector(`[data-category="${categoryId}"]`);
+      if (navbarButton) {
+        // Add a subtle highlight to the navbar
+        navbarButton.style.backgroundColor = '#f0f9ff';
+        navbarButton.click();
+
+        // Remove highlight after a moment
+        setTimeout(() => {
+          navbarButton.style.backgroundColor = '';
+        }, 2000);
+      }
+    }, 600);
+  };
 
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-brand-900 mb-16">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-900 to-brand-800 mix-blend-multiply" aria-hidden="true"></div>
+      <div className="relative overflow-hidden bg-gradient-to-br from-brand-900 via-brand-800 to-brand-900 mb-16">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}></div>
         </div>
+
+        {/* Floating Elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-white/5 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-32 h-32 bg-brand-400/10 rounded-full blur-2xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-white/5 rounded-full blur-xl animate-pulse delay-500"></div>
+
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-display text-center">
-            Welcome to GB GLOBA<span className="relative inline-block">L<sup className="absolute -top-3 -right-3 sm:-right-4 lg:-right-5 text-xl sm:text-2xl text-white">®</sup></span>
-          </h1>
-          <p className="mt-6 max-w-xl mx-auto text-xl text-brand-100 sm:max-w-3xl text-center">
-            Your trusted source for quality spare parts
-          </p>
-          <div className="mt-10 max-w-md mx-auto sm:max-w-xl sm:flex sm:justify-center">
-            <div className="rounded-md shadow">
-              <a href="#categories" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-brand-700 bg-white hover:bg-brand-50 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
+          {/* Main Heading */}
+          <div className="text-center">
+            <div className="mb-6">
+              <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-brand-600/20 text-brand-100 border border-brand-400/30">
+                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Trusted Quality Since Years
+              </span>
+            </div>
+
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl font-display mb-6">
+              Welcome to{' '}
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-white to-brand-100 bg-clip-text text-transparent">
+                  GB GLOBA
+                </span>
+                <span className="relative">
+                  L
+                  <sup className="absolute -top-3 -right-3 sm:-right-4 lg:-right-5 text-xl sm:text-2xl text-brand-200">®</sup>
+                </span>
+              </span>
+            </h1>
+
+            <p className="mt-6 max-w-2xl mx-auto text-xl text-brand-100 leading-relaxed">
+              Your trusted source for premium quality spare parts for washing machines, microwaves, and car washers.
+              <span className="block mt-2 text-lg text-brand-200">Find exactly what you need, when you need it.</span>
+            </p>
+
+            {/* Stats */}
+            <div className="mt-12 grid grid-cols-3 gap-8 max-w-lg mx-auto">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">500+</div>
+                <div className="text-sm text-brand-200">Products</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">50+</div>
+                <div className="text-sm text-brand-200">Brands</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-white">24/7</div>
+                <div className="text-sm text-brand-200">Support</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mt-12 max-w-md mx-auto sm:max-w-xl sm:flex sm:justify-center gap-4">
+              <a
+                href="#categories"
+                className="group w-full sm:w-auto flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-xl text-brand-700 bg-white hover:bg-brand-50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out"
+              >
+                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
                 Explore Categories
               </a>
-            </div>
-            <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-              <a href="#about" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
+              <a
+                href="#about"
+                className="group w-full sm:w-auto flex items-center justify-center px-8 py-4 border border-brand-400/30 text-base font-medium rounded-xl text-white bg-brand-600/20 backdrop-blur-sm hover:bg-brand-600/30 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out mt-3 sm:mt-0"
+              >
+                <svg className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 Learn More
               </a>
             </div>
@@ -291,31 +386,93 @@ export default function Home() {
 
       {/* Categories Section */}
       <div id="categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-neutral-800 font-display sm:text-4xl">Browse Our Categories</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-neutral-800 font-display sm:text-4xl mb-4">Browse Our Categories</h2>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-neutral-500">Find the exact part you need for your appliance</p>
+          <div className="mt-6 flex justify-center">
+            <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-full"></div>
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 stagger-animation">
           {categories.map((category, index) => (
-            <div key={index} className="group relative bg-white rounded-2xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:shadow-elevated">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
-              <img
-                className="h-80 w-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                src={category.image}
-                alt={category.title}
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
-                <h3 className="text-2xl font-bold font-display mb-2">{category.title}</h3>
-                <p className="text-white/90 mb-4">{category.description}</p>
-                <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors duration-150 ease-in-out">
-                  Explore
-                  <svg className="ml-2 -mr-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
+            <div
+              key={index}
+              className="group relative bg-white rounded-2xl shadow-card overflow-hidden transition-all duration-300 transform hover:-translate-y-2 hover:shadow-elevated cursor-pointer"
+              onClick={() => handleExploreCategory(category.id)}
+              data-category-card={category.id}
+            >
+              {/* Image Container */}
+              <div className="relative h-64 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
+                <ImageWithFallback
+                  className="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+                  src={category.image}
+                  alt={category.title}
+                />
+                {/* Product Count Badge */}
+                <div className="absolute top-4 right-4 z-20">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-brand-600 text-white shadow-lg">
+                    {category.itemCount}
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Container */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold font-display mb-3 text-neutral-800 group-hover:text-brand-600 transition-colors duration-200">
+                  {category.title}
+                </h3>
+                <p className="text-neutral-600 mb-6 leading-relaxed">
+                  {category.description}
+                </p>
+
+                {/* Explore Button */}
+                <div className="flex items-center justify-between">
+                  <button className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all duration-200 group-hover:shadow-lg transform group-hover:scale-105">
+                    Explore Products
+                    <svg className="ml-2 -mr-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </button>
+
+                  {/* Category Icon */}
+                  <div className="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center group-hover:bg-brand-100 transition-colors duration-200">
+                    {category.id === 'washing-machine' && (
+                      <svg className="w-6 h-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    )}
+                    {category.id === 'microwave' && (
+                      <svg className="w-6 h-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                      </svg>
+                    )}
+                    {category.id === 'car-washer' && (
+                      <svg className="w-6 h-6 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-brand-50 to-brand-100 rounded-2xl p-8">
+            <h3 className="text-2xl font-bold text-neutral-800 mb-4">Can't find what you're looking for?</h3>
+            <p className="text-neutral-600 mb-6 max-w-2xl mx-auto">
+              Our expert team is here to help you find the exact spare part you need. Contact us for personalized assistance.
+            </p>
+            <button className="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-all duration-200">
+              Contact Our Experts
+              <svg className="ml-2 -mr-1 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
