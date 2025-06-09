@@ -646,45 +646,57 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-card sticky top-0 z-50">
+    <nav className="bg-white/95 backdrop-blur-md shadow-card sticky top-0 z-50 border-b border-neutral-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <img src={logo} alt="Logo" className="h-14 w-auto" />
+            <Link to="/" className="flex items-center space-x-2 group">
+              <img
+                src={logo}
+                alt="GB Global Logo"
+                className="h-14 w-auto transition-transform duration-200 group-hover:scale-105"
+              />
             </Link>
           </div>
 
           {/* Desktop menu */}
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          <div className="hidden lg:flex lg:items-center lg:space-x-6">
             {Object.entries(categories).map(([category, items]) => (
               <Popover key={category} className="relative">
                 {({ open }) => (
                   <>
                     <Popover.Button
-                      className={`group inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition duration-200 ease-in-out ${open ? 'text-brand-700 bg-brand-50' : 'text-neutral-600 hover:text-brand-600 hover:bg-brand-50'}`}
+                      className={`group inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out touch-target ${
+                        open
+                          ? 'text-brand-700 bg-brand-50 shadow-soft'
+                          : 'text-neutral-700 hover:text-brand-600 hover:bg-brand-50 hover:shadow-soft'
+                      }`}
                       data-category={category.toLowerCase().replace(' ', '-')}
                     >
-                      <span>{category}</span>
+                      <span className="font-semibold">{category}</span>
                       <ChevronDownIcon
-                        className={`ml-2 h-5 w-5 transition duration-150 ease-in-out ${open ? 'text-brand-600 rotate-180' : 'text-neutral-400 group-hover:text-brand-500'}`}
+                        className={`ml-2 h-4 w-4 transition-all duration-200 ease-in-out ${
+                          open
+                            ? 'text-brand-600 rotate-180 transform'
+                            : 'text-neutral-400 group-hover:text-brand-500'
+                        }`}
                         aria-hidden="true"
                       />
                     </Popover.Button>
 
                     <Transition
                       as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
+                      enter="transition ease-out duration-300"
+                      enterFrom="opacity-0 translate-y-2 scale-95"
+                      enterTo="opacity-100 translate-y-0 scale-100"
+                      leave="transition ease-in duration-200"
+                      leaveFrom="opacity-100 translate-y-0 scale-100"
+                      leaveTo="opacity-0 translate-y-2 scale-95"
                     >
-                      <Popover.Panel className="absolute z-10 mt-3 transform -translate-x-1/4 w-screen max-w-xs lg:max-w-md">
-                        <div className="rounded-xl shadow-elevated bg-white ring-1 ring-black ring-opacity-5 overflow-visible">
-                          <div className="relative grid gap-1 bg-white px-5 py-6 overflow-visible">
+                      <Popover.Panel className="absolute z-60 mt-3 transform -translate-x-1/4 w-screen max-w-xs lg:max-w-md">
+                        <div className="rounded-2xl shadow-elevated bg-white/95 backdrop-blur-md ring-1 ring-neutral-200 overflow-visible border border-neutral-100">
+                          <div className="relative grid gap-1 bg-white/50 backdrop-blur-sm px-6 py-6 overflow-visible">
                             {items.map((item) => (
                               item.subItems ? (
                                 <div key={item.id} className="relative group/flyout overflow-visible">
@@ -754,33 +766,37 @@ export default function Navbar() {
           </div>
 
           {/* Search form */}
-          <div className="hidden md:flex md:items-center">
+          <div className="hidden lg:flex lg:items-center">
             <form onSubmit={handleSearch} className="flex relative" ref={searchRef}>
-              <div className="relative rounded-md shadow-sm">
+              <div className="relative rounded-lg shadow-soft">
                 <input
                   type="search"
                   placeholder="Search products..."
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
-                  className="block w-full pl-4 pr-10 py-2 border border-neutral-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 sm:text-sm transition duration-150 ease-in-out"
+                  className="search-input w-64 xl:w-80 pl-4 pr-12 py-3 border border-neutral-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition-all duration-200 bg-neutral-50 focus:bg-white"
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
                   <MagnifyingGlassIcon className="h-5 w-5 text-neutral-400" aria-hidden="true" />
                 </div>
 
                 {/* Search Suggestions Dropdown */}
                 {showSuggestions && suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-neutral-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-md border border-neutral-200 rounded-lg shadow-elevated z-70 max-h-64 overflow-y-auto">
                     {suggestions.map((suggestion, index) => (
                       <button
                         key={index}
                         type="button"
                         onClick={() => handleSuggestionClick(suggestion)}
-                        className="w-full text-left px-4 py-2 hover:bg-brand-50 focus:bg-brand-50 focus:outline-none transition duration-150 ease-in-out border-b border-neutral-100 last:border-b-0"
+                        className="w-full text-left px-4 py-3 hover:bg-brand-50 focus:bg-brand-50 focus:outline-none transition-all duration-200 ease-in-out border-b border-neutral-100 last:border-b-0 group"
                       >
-                        <div className="text-sm font-medium text-neutral-800">{suggestion.name}</div>
-                        <div className="text-xs text-neutral-500 capitalize">{suggestion.category.replace('-', ' ')}</div>
+                        <div className="text-sm font-medium text-neutral-800 group-hover:text-brand-700 transition-colors duration-150">
+                          {suggestion.name}
+                        </div>
+                        <div className="text-xs text-neutral-500 capitalize mt-1">
+                          {suggestion.category.replace('-', ' ')}
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -788,25 +804,37 @@ export default function Navbar() {
               </div>
               <button
                 type="submit"
-                className="ml-px inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition duration-150 ease-in-out"
+                className="btn-primary ml-px px-6 py-3 rounded-r-lg text-sm font-semibold shadow-soft hover:shadow-card transform hover:scale-105 transition-all duration-200"
               >
+                <MagnifyingGlassIcon className="h-4 w-4 mr-2" />
                 Search
               </button>
             </form>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex md:hidden">
+          {/* Mobile menu button and search */}
+          <div className="flex lg:hidden items-center space-x-3">
+            {/* Mobile search button */}
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500 transition duration-150 ease-in-out"
+              className="touch-target inline-flex items-center justify-center p-2 rounded-lg text-neutral-500 hover:text-brand-600 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all duration-200"
+              onClick={() => {/* Add mobile search modal logic */}}
+            >
+              <span className="sr-only">Search</span>
+              <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              type="button"
+              className="touch-target inline-flex items-center justify-center p-2 rounded-lg text-neutral-500 hover:text-brand-600 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all duration-200"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? (
-                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                <XMarkIcon className="block h-6 w-6 transform rotate-180 transition-transform duration-200" aria-hidden="true" />
               ) : (
-                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                <Bars3Icon className="block h-6 w-6 transition-transform duration-200" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -817,47 +845,61 @@ export default function Navbar() {
       <Transition
         show={mobileMenuOpen}
         as={Fragment}
-        enter="transition ease-out duration-200"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="transition ease-in duration-150"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
+        enter="transition ease-out duration-300"
+        enterFrom="opacity-0 -translate-y-4 scale-95"
+        enterTo="opacity-100 translate-y-0 scale-100"
+        leave="transition ease-in duration-200"
+        leaveFrom="opacity-100 translate-y-0 scale-100"
+        leaveTo="opacity-0 -translate-y-4 scale-95"
       >
-        <div className="md:hidden bg-white shadow-elevated rounded-b-xl">
-          <div className="pt-2 pb-3 space-y-1 divide-y divide-neutral-200">
-            {Object.entries(categories).map(([category, items]) => (
-              <div key={category} className="px-4 py-3">
-                <div className="font-medium text-brand-700 mb-2 font-display">{category}</div>
-                <div className="pl-4 space-y-1">
-                  {items.map((item) => (
+        <div className="lg:hidden bg-white/95 backdrop-blur-md shadow-elevated rounded-b-2xl border-t border-neutral-100 safe-bottom">
+          <div className="pt-4 pb-6 space-y-2 max-h-[70vh] overflow-y-auto scroll-smooth">
+            {Object.entries(categories).map(([category, items], categoryIndex) => (
+              <div key={category} className="px-6 py-4 border-b border-neutral-100 last:border-b-0">
+                <div className="font-semibold text-brand-700 mb-3 font-display text-lg flex items-center">
+                  <span className="w-2 h-2 bg-brand-500 rounded-full mr-3"></span>
+                  {category}
+                </div>
+                <div className="space-y-2">
+                  {items.map((item, itemIndex) => (
                     item.subItems ? (
-                      <div key={item.id}>
-                        <div className="px-3 py-2 text-base font-medium text-neutral-700 flex items-center justify-between">
+                      <div key={item.id} className="space-y-2">
+                        <div className="touch-target flex items-center justify-between px-4 py-3 text-base font-medium text-neutral-700 bg-neutral-50 rounded-lg">
                           <span>{item.name}</span>
                           <ChevronDownIcon className="h-5 w-5 text-neutral-400" aria-hidden="true" />
                         </div>
-                        <div className="pl-6 space-y-1 mt-1 border-l-2 border-brand-100">
-                          {item.subItems.map((subItem) => (
+                        <div className="pl-6 space-y-1 border-l-2 border-brand-200">
+                          {item.subItems.slice(0, 5).map((subItem) => (
                             <Link
                               key={subItem.id}
                               to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
-                              className="flex items-center px-3 py-2 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                              className="touch-target flex items-center px-4 py-3 text-sm font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-all duration-200 ease-in-out"
                               onClick={() => setMobileMenuOpen(false)}
                             >
+                              <span className="w-1.5 h-1.5 bg-neutral-300 rounded-full mr-3"></span>
                               {subItem.name}
                             </Link>
                           ))}
+                          {item.subItems.length > 5 && (
+                            <Link
+                              to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
+                              className="touch-target flex items-center px-4 py-3 text-sm font-medium text-brand-600 hover:bg-brand-50 rounded-lg transition-all duration-200 ease-in-out"
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              <span className="w-1.5 h-1.5 bg-brand-500 rounded-full mr-3"></span>
+                              View all {item.subItems.length} items →
+                            </Link>
+                          )}
                         </div>
                       </div>
                     ) : (
                       <Link
                         key={item.id}
                         to={item.customLink || `/product/${category.toLowerCase()}/${item.id}`}
-                        className="flex items-center px-3 py-2 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-md transition duration-150 ease-in-out"
+                        className="touch-target flex items-center px-4 py-3 text-base font-medium text-neutral-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-all duration-200 ease-in-out"
                         onClick={() => setMobileMenuOpen(false)}
                       >
-
+                        <span className="w-2 h-2 bg-neutral-300 rounded-full mr-3"></span>
                         {item.name}
                       </Link>
                     )
@@ -866,18 +908,18 @@ export default function Navbar() {
               </div>
             ))}
           </div>
-          <div className="pt-4 pb-5 border-t border-neutral-200">
-            <form onSubmit={handleSearch} className="px-4 flex">
+          <div className="pt-6 pb-6 border-t border-neutral-200 bg-neutral-50/50">
+            <form onSubmit={handleSearch} className="px-6 flex">
               <input
                 type="search"
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={handleSearchChange}
-                className="flex-1 px-4 py-2 border border-r-0 border-neutral-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition duration-150 ease-in-out"
+                className="search-input flex-1 px-4 py-4 border border-r-0 border-neutral-300 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all duration-200 text-base"
               />
               <button
                 type="submit"
-                className="bg-brand-600 text-white px-4 py-2 rounded-r-lg hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-brand-500 transition duration-150 ease-in-out"
+                className="btn-primary px-6 py-4 rounded-r-xl shadow-soft hover:shadow-card transform hover:scale-105 transition-all duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <MagnifyingGlassIcon className="h-5 w-5" />

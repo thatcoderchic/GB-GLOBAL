@@ -16,10 +16,10 @@ export default function WashMotor() {
       'Motor wash 08 selaed.jpeg',
       'Motor wash 09 copper.jpeg',
       'Motor wash 12 copper.jpeg',
-      'Motor wash G15 alu.jpeg',
-      'Motor wash G16 alu.jpeg',
-      'Motor wash G19 alu.jpeg',
-      'Motor wash G20 alu.jpeg',
+      'Motor wash G15 .jpeg',
+      'Motor wash G16 .jpeg',
+      'Motor wash G19 .jpeg',
+      'Motor wash G20 .jpeg',
     ];
 
     // Create an array of image objects with paths and formatted names
