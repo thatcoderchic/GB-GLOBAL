@@ -4,6 +4,7 @@ import { createImageObject } from '../utils/imageUtils';
 export default function ImageTest() {
   const [testResults, setTestResults] = useState([]);
   const [simpleTest, setSimpleTest] = useState(null);
+  const [comprehensiveTest, setComprehensiveTest] = useState([]);
 
   useEffect(() => {
     // Simple test first
@@ -47,6 +48,68 @@ export default function ImageTest() {
     });
 
     Promise.all(testPromises).then(setTestResults);
+
+    // Comprehensive test of all product categories
+    const comprehensiveTests = [
+      {
+        category: 'Wash Motor',
+        basePath: '/GBPICS/Washing Machine spare pic/Motor/Wash Motor',
+        samples: ['Motor wash 06 copper.jpeg', 'Motor wash 07 sealed.jpeg', 'Motor LG wash 06 .jpeg']
+      },
+      {
+        category: 'Spin Motor',
+        basePath: '/GBPICS/Washing Machine spare pic/Motor/Spin Motor',
+        samples: ['Motor spin 01 copper.jpeg', 'Motor spin 02 sealed.jpeg', 'Motor spin 03 .jpeg']
+      },
+      {
+        category: 'Door Lock',
+        basePath: '/GBPICS/Washing Machine spare pic/Door Lock',
+        samples: ['Door Lock for LG.jpeg', 'Black Big Door lock for LG.jpeg', 'White Door Lock for LG.jpeg']
+      },
+      {
+        category: 'Gear Box Raja',
+        basePath: '/GBPICS/Washing Machine spare pic/Gearbox-RAJA',
+        samples: ['gearbox01raja.jpeg', 'gearbox02raja.jpeg', 'gearbox07raja.jpeg']
+      },
+      {
+        category: 'Magnetron',
+        basePath: '/GBPICS/Microwave spare pic/Magnetron',
+        samples: ['Magnetron 210 witol.jpeg', 'Magnetron 213 witol.jpeg', 'Magnetron 214.jpeg']
+      }
+    ];
+
+    const runComprehensiveTest = async () => {
+      const results = [];
+      for (const test of comprehensiveTests) {
+        for (const sample of test.samples) {
+          const imageObj = createImageObject(test.basePath, sample);
+          try {
+            const response = await fetch(imageObj.path, { method: 'HEAD' });
+            results.push({
+              category: test.category,
+              filename: sample,
+              primaryPath: imageObj.path,
+              primaryWorks: response.ok,
+              alternativePath: imageObj.alternativePath,
+              alternativeWorks: false // Will test separately
+            });
+          } catch (error) {
+            results.push({
+              category: test.category,
+              filename: sample,
+              primaryPath: imageObj.path,
+              primaryWorks: false,
+              alternativePath: imageObj.alternativePath,
+              alternativeWorks: false,
+              error: error.message
+            });
+          }
+        }
+      }
+      setComprehensiveTest(results);
+    };
+
+    runComprehensiveTest();
   }, []);
 
   return (
@@ -117,20 +180,66 @@ export default function ImageTest() {
         ))}
       </div>
 
+      {/* Comprehensive Test Results */}
+      {comprehensiveTest.length > 0 && (
+        <div className="mt-8 p-4 bg-green-50 rounded-lg">
+          <h3 className="text-lg font-semibold mb-4">Comprehensive Image Test Results</h3>
+          <div className="space-y-4">
+            {comprehensiveTest.map((result, index) => (
+              <div key={index} className="border rounded p-3 bg-white">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-medium">{result.category} - {result.filename}</h4>
+                  <span className={`px-2 py-1 rounded text-sm ${
+                    result.primaryWorks ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  }`}>
+                    {result.primaryWorks ? 'Working' : 'Failed'}
+                  </span>
+                </div>
+                <div className="text-sm space-y-1">
+                  <div>
+                    <strong>Primary:</strong>
+                    <code className="ml-2 text-xs bg-gray-100 p-1 rounded">{result.primaryPath}</code>
+                  </div>
+                  <div>
+                    <strong>Alternative:</strong>
+                    <code className="ml-2 text-xs bg-gray-100 p-1 rounded">{result.alternativePath}</code>
+                  </div>
+                  {result.error && (
+                    <div className="text-red-600">
+                      <strong>Error:</strong> {result.error}
+                    </div>
+                  )}
+                </div>
+                {result.primaryWorks && (
+                  <div className="mt-2">
+                    <img
+                      src={result.primaryPath}
+                      alt={result.filename}
+                      className="w-20 h-20 object-cover rounded border"
+                      onError={(e) => e.target.style.display = 'none'}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-8 p-4 bg-blue-50 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">Direct Test Links</h3>
         <div className="space-y-2">
-          <a 
-            href="/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg" 
-            target="_blank" 
+          <a
+            href="/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg"
+            target="_blank"
             rel="noopener noreferrer"
             className="block text-blue-600 hover:underline"
           >
             Test Direct Image Link 1
           </a>
-          <a 
-            href="/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg" 
-            target="_blank" 
+          <a
+            href="/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg"
+            target="_blank"
             rel="noopener noreferrer"
             className="block text-blue-600 hover:underline"
           >
