@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { createImageObject } from '../utils/imageUtils';
 
 export default function Timer() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   useEffect(() => {
     // This array contains all the image filenames from the Timer folder
@@ -40,20 +42,29 @@ export default function Timer() {
     ];
 
     // Create an array of image objects with paths and formatted names
-    const formattedImages = imageFiles.map(filename => {
-      // Format the name by removing the file extension and trimming spaces
-      const name = filename.replace('.jpeg', '').trim();
-
-      return {
-        path: `/GBPICS/Washing Machine spare pic/Timer/${filename}`,
-        name: name,
-        id: filename.replace('.jpeg', '').replace(/\s+/g, '-').toLowerCase()
-      };
-    });
+    const basePath = '/GBPICS/Washing Machine spare pic/Timer';
+    const formattedImages = imageFiles.map(filename =>
+      createImageObject(basePath, filename)
+    );
 
     setImages(formattedImages);
     setLoading(false);
   }, []);
+
+  const handleImageError = (imageId, imageObj) => {
+    console.log(`Image failed to load: ${imageId}`, imageObj);
+
+    // Try alternative path first
+    const img = document.querySelector(`img[data-image-id="${imageId}"]`);
+    if (img && imageObj.alternativePath && !img.src.includes('/gbpics-test/')) {
+      console.log(`Trying alternative path for ${imageId}:`, imageObj.alternativePath);
+      img.src = imageObj.alternativePath;
+      return;
+    }
+
+    console.log(`Both paths failed for ${imageId}, marking as failed`);
+    setFailedImages(prev => new Set([...prev, imageId]));
+  };
 
   return (
     <div className="animate-fade-in">
@@ -129,11 +140,24 @@ export default function Timer() {
             {images.map((image) => (
               <div key={image.id} className="group bg-white rounded-xl shadow-card overflow-hidden hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-w-1 aspect-h-1 bg-neutral-100 overflow-hidden">
-                  <img
-                    src={image.path}
-                    alt={image.name}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
-                  />
+                  {failedImages.has(image.id) ? (
+                    <div className="w-full h-full flex items-center justify-center bg-neutral-100">
+                      <div className="text-center">
+                        <svg className="mx-auto h-12 w-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p className="mt-2 text-sm text-neutral-500">Image not available</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <img
+                      src={image.path}
+                      alt={image.name}
+                      data-image-id={image.id}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                      onError={() => handleImageError(image.id, image)}
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-neutral-800 group-hover:text-brand-600 transition-colors duration-150 ease-in-out">

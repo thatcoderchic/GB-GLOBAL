@@ -35,7 +35,18 @@ export default function DoorLock() {
     setLoading(false);
   }, []);
 
-  const handleImageError = (imageId) => {
+  const handleImageError = (imageId, imageObj) => {
+    console.log(`Image failed to load: ${imageId}`, imageObj);
+
+    // Try alternative path first
+    const img = document.querySelector(`img[data-image-id="${imageId}"]`);
+    if (img && imageObj.alternativePath && !img.src.includes('/gbpics-test/')) {
+      console.log(`Trying alternative path for ${imageId}:`, imageObj.alternativePath);
+      img.src = imageObj.alternativePath;
+      return;
+    }
+
+    console.log(`Both paths failed for ${imageId}, marking as failed`);
     setFailedImages(prev => new Set([...prev, imageId]));
   };
 
@@ -126,8 +137,9 @@ export default function DoorLock() {
                     <img
                       src={image.path}
                       alt={image.name}
+                      data-image-id={image.id}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
-                      onError={() => handleImageError(image.id)}
+                      onError={() => handleImageError(image.id, image)}
                     />
                   )}
                 </div>

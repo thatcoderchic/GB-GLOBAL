@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        .image-test { margin: 10px 0; }
+        img { max-width: 200px; height: auto; border: 2px solid green; }
+        img.error { border-color: red; }
+        .path { font-family: monospace; background: #f5f5f5; padding: 5px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Direct Image Access Test</h1>
+    
+    <div class="test-section">
+        <h2>Wash Motor Images</h2>
+        
+        <div class="image-test">
+            <h3>Test 1: Direct path with spaces</h3>
+            <div class="path">/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg</div>
+            <img src="/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg" 
+                 alt="Test 1" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+        
+        <div class="image-test">
+            <h3>Test 2: URL encoded path</h3>
+            <div class="path">/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg</div>
+            <img src="/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg" 
+                 alt="Test 2" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+        
+        <div class="image-test">
+            <h3>Test 3: Alternative path (gbpics-test)</h3>
+            <div class="path">/gbpics-test/Motor/Wash Motor/Motor wash 06 copper.jpeg</div>
+            <img src="/gbpics-test/Motor/Wash Motor/Motor wash 06 copper.jpeg" 
+                 alt="Test 3" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+        
+        <div class="image-test">
+            <h3>Test 4: Alternative path encoded</h3>
+            <div class="path">/gbpics-test/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg</div>
+            <img src="/gbpics-test/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg" 
+                 alt="Test 4" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Spin Motor Images</h2>
+        
+        <div class="image-test">
+            <h3>Test 5: Spin motor direct</h3>
+            <div class="path">/GBPICS/Washing Machine spare pic/Motor/Spin Motor/Motor spin 01 copper.jpeg</div>
+            <img src="/GBPICS/Washing Machine spare pic/Motor/Spin Motor/Motor spin 01 copper.jpeg" 
+                 alt="Test 5" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+        
+        <div class="image-test">
+            <h3>Test 6: Spin motor encoded</h3>
+            <div class="path">/GBPICS/Washing%20Machine%20spare%20pic/Motor/Spin%20Motor/Motor%20spin%2001%20copper.jpeg</div>
+            <img src="/GBPICS/Washing%20Machine%20spare%20pic/Motor/Spin%20Motor/Motor%20spin%2001%20copper.jpeg" 
+                 alt="Test 6" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Door Lock Images</h2>
+        
+        <div class="image-test">
+            <h3>Test 7: Door lock direct</h3>
+            <div class="path">/GBPICS/Washing Machine spare pic/Door Lock/Door Lock for LG.jpeg</div>
+            <img src="/GBPICS/Washing Machine spare pic/Door Lock/Door Lock for LG.jpeg" 
+                 alt="Test 7" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+        
+        <div class="image-test">
+            <h3>Test 8: Door lock alternative</h3>
+            <div class="path">/gbpics-test/Door Lock/Door Lock for LG.jpeg</div>
+            <img src="/gbpics-test/Door Lock/Door Lock for LG.jpeg" 
+                 alt="Test 8" 
+                 onerror="this.className='error'; this.nextSibling.innerHTML='FAILED';">
+            <span></span>
+        </div>
+    </div>
+</body>
+</html>

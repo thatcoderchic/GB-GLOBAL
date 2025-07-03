@@ -12,13 +12,25 @@ export const getImagePath = (basePath, filename) => {
   // Construct the full path
   const fullPath = `${basePath}/${filename}`;
 
-  // Split path into segments and encode each segment separately
+  // Encode the path properly for URLs
+  // Split by '/' and encode each segment, then rejoin
   const segments = fullPath.split('/');
-  const encodedSegments = segments.map(segment =>
-    segment === '' ? '' : encodeURIComponent(segment)
-  );
+  const encodedSegments = segments.map(segment => {
+    if (segment === '') return '';
+    // Use encodeURIComponent for proper encoding
+    return encodeURIComponent(segment);
+  });
 
-  return encodedSegments.join('/');
+  const encodedPath = encodedSegments.join('/');
+
+  console.log('Image path generation:', {
+    basePath,
+    filename,
+    fullPath,
+    encodedPath
+  });
+
+  return encodedPath;
 };
 
 /**

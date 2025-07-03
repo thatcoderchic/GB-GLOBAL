@@ -88,7 +88,21 @@ const OptimizedImage = ({
 
   const handleImageError = useCallback(() => {
     setImageState(prev => {
-      if (prev.retryCount < maxRetries) {
+      console.log('OptimizedImage error:', {
+        src: prev.currentSrc,
+        retryCount: prev.retryCount,
+        fallbackSrc
+      });
+
+      if (prev.retryCount === 0 && fallbackSrc && prev.currentSrc !== fallbackSrc) {
+        // Try fallback path first
+        console.log('Trying fallback path:', fallbackSrc);
+        return {
+          ...prev,
+          currentSrc: fallbackSrc,
+          retryCount: 1
+        };
+      } else if (prev.retryCount < maxRetries) {
         // Try with different format or retry
         const newRetryCount = prev.retryCount + 1;
         setTimeout(() => {
@@ -96,7 +110,7 @@ const OptimizedImage = ({
             imgRef.current.src = prev.currentSrc;
           }
         }, 1000 * newRetryCount);
-        
+
         return {
           ...prev,
           retryCount: newRetryCount
@@ -110,7 +124,7 @@ const OptimizedImage = ({
         };
       }
     });
-  }, [onError]);
+  }, [onError, fallbackSrc]);
 
   const handleImageLoad = useCallback(() => {
     setImageState(prev => ({

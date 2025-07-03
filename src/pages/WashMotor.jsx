@@ -47,20 +47,27 @@ export default function WashMotor() {
 
     // Debug: Log the first few image paths
     console.log('Wash Motor Images:', formattedImages.slice(0, 3));
+    console.log('Sample image paths:', {
+      primary: formattedImages[0]?.path,
+      alternative: formattedImages[0]?.alternativePath
+    });
 
     setImages(formattedImages);
     setLoading(false);
   }, []);
 
   const handleImageError = (imageId, imageObj) => {
+    console.log(`Image failed to load: ${imageId}`, imageObj);
+
     // Try alternative path first
     const img = document.querySelector(`img[data-image-id="${imageId}"]`);
-    if (img && imageObj.alternativePath && img.src !== window.location.origin + imageObj.alternativePath) {
+    if (img && imageObj.alternativePath && !img.src.includes('/gbpics-test/')) {
       console.log(`Trying alternative path for ${imageId}:`, imageObj.alternativePath);
       img.src = imageObj.alternativePath;
       return;
     }
 
+    console.log(`Both paths failed for ${imageId}, marking as failed`);
     setFailedImages(prev => new Set([...prev, imageId]));
   };
 
