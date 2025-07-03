@@ -3,4 +3,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  server: {
+    fs: {
+      // Allow serving files from the GBPICS directory
+      allow: ['..', 'public/GBPICS']
+    }
+  },
+  assetsInclude: ['**/*.jpeg', '**/*.jpg', '**/*.png'],
 });

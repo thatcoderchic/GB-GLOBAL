@@ -25,6 +25,7 @@ import CarWasherPipe from './pages/CarWasherPipe';
 import CarWasherFilter from './pages/CarWasherFilter';
 import CarWasherGun from './pages/CarWasherGun';
 import CarWasherSwitch from './pages/CarWasherSwitch';
+import ImageTest from './pages/ImageTest';
 import Footer from './components/Footer';
 import './styles/animations.css';
 
@@ -60,6 +61,7 @@ function App() {
               <Route path="/car-washer-filter" element={<CarWasherFilter />} />
               <Route path="/car-washer-gun" element={<CarWasherGun />} />
               <Route path="/car-washer-switch" element={<CarWasherSwitch />} />
+              <Route path="/image-test" element={<ImageTest />} />
             </Routes>
           </main>
           <Footer />

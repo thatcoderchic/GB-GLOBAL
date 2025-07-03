@@ -1,45 +1,52 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { createImageObject } from '../utils/imageUtils';
 
 export default function SpinMotor() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   useEffect(() => {
     // This array contains all the image filenames from the Spin Motor folder
     const imageFiles = [
+      'Motor G20 suitable for woi 11 kg.jpeg',
       'Motor spin 01 copper.jpeg',
+      'Motor spin 01 jpeg.jpeg',
       'Motor spin 01 sealed.jpeg',
+      'Motor spin 02 .jpeg',
       'Motor spin 02 copper.jpeg',
       'Motor spin 02 sealed.jpeg',
+      'Motor spin 03 .jpeg',
       'Motor spin 03 copper.jpeg',
       'Motor spin 03 selaed.jpeg',
+      'Motor spin 04 .jpeg',
       'Motor spin 04 copper.jpeg',
       'Motor spin 04 sealed.jpeg',
+      'Motor spin 05 .jpeg',
       'Motor spin 05 copper.jpeg',
       'Motor spin 05 sealed.jpeg',
+      'Motor spin 11 sealed.jpeg',
       'Motor spin G11 alu.jpeg',
+      'Motor spin G11 suitable for LG 9 kg.jpeg',
+      'Motor spin multi 14 .jpeg',
       'Motor spin multi 14 copper.jpeg',
+      'Motor spin multi 14 sealed.jpeg',
     ];
 
     // Create an array of image objects with paths and formatted names
-    const formattedImages = imageFiles.map(filename => {
-      // Format the name by removing the file extension and formatting it
-      const name = filename
-        .replace('.jpeg', '')
-        .replace(/selaed/i, 'sealed') // Fix typo in filename
-        .split(/(?=[A-Z])/).join(' '); // Add space before capital letters
-
-      return {
-        path: `/images/spin-motor/${filename}`,
-        name: name,
-        id: filename.replace('.jpeg', '').replace(/\s+/g, '-').toLowerCase()
-      };
-    });
+    const basePath = '/GBPICS/Washing Machine spare pic/Motor/Spin Motor';
+    const formattedImages = imageFiles.map(filename =>
+      createImageObject(basePath, filename)
+    );
 
     setImages(formattedImages);
     setLoading(false);
   }, []);
+
+  const handleImageError = (imageId) => {
+    setFailedImages(prev => new Set([...prev, imageId]));
+  };
 
   return (
     <div className="animate-fade-in">
@@ -125,11 +132,23 @@ export default function SpinMotor() {
             {images.map((image) => (
               <div key={image.id} className="group bg-white rounded-xl shadow-card overflow-hidden hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-w-1 aspect-h-1 bg-neutral-100 overflow-hidden">
-                  <img
-                    src={image.path}
-                    alt={image.name}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
-                  />
+                  {failedImages.has(image.id) ? (
+                    <div className="w-full h-full flex items-center justify-center bg-neutral-100">
+                      <div className="text-center">
+                        <svg className="mx-auto h-12 w-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p className="mt-2 text-sm text-neutral-500">Image not available</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <img
+                      src={image.path}
+                      alt={image.name}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                      onError={() => handleImageError(image.id)}
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-neutral-800 group-hover:text-brand-600 transition-colors duration-150 ease-in-out">

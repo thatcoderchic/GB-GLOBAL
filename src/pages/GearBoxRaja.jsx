@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import OptimizedImage from '../components/OptimizedImage';
+import { preloadImage } from '../utils/imagePreloader';
+import { createImageObject } from '../utils/imageUtils';
 
 export default function GearBoxRaja() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   useEffect(() => {
     // This array contains all the image filenames from the Gearbox-RAJA folder
@@ -40,25 +44,27 @@ export default function GearBoxRaja() {
     ];
 
     // Create an array of image objects with paths and formatted names
+    const basePath = '/GBPICS/Washing Machine spare pic/Gearbox-RAJA';
     const formattedImages = imageFiles.map(filename => {
-      // Format the name by removing the file extension and formatting it
-      const name = filename
-        .replace('.jpeg', '')
-        .replace(/([0-9]+)([a-z]+)/, '$1 $2') // Add space between numbers and letters
-        .split(/(?=[A-Z])/).join(' ') // Add space before capital letters
+      const imageObj = createImageObject(basePath, filename);
+      // Apply custom formatting for gearbox names
+      imageObj.name = imageObj.name
         .replace(/\bn\b/i, '') // Remove standalone 'n'
         .toUpperCase(); // Convert to uppercase
-
-      return {
-        path: `/images/gearbox-raja/${filename}`,
-        name: name,
-        id: filename.replace('.jpeg', '')
-      };
+      return imageObj;
     });
 
     setImages(formattedImages);
     setLoading(false);
+
+    // Preload first few images for better performance
+    const firstFewImages = formattedImages.slice(0, 3).map(img => img.path);
+    firstFewImages.forEach(src => preloadImage(src));
   }, []);
+
+  const handleImageError = (imageId) => {
+    setFailedImages(prev => new Set([...prev, imageId]));
+  };
 
   return (
     <div className="animate-fade-in">
@@ -134,10 +140,12 @@ export default function GearBoxRaja() {
             {images.map((image) => (
               <div key={image.id} className="group bg-white rounded-xl shadow-card overflow-hidden hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-w-1 aspect-h-1 bg-neutral-100 overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={image.path}
                     alt={image.name}
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-6">

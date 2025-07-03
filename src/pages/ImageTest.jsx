@@ -1,0 +1,143 @@
+import { useState, useEffect } from 'react';
+import { createImageObject } from '../utils/imageUtils';
+
+export default function ImageTest() {
+  const [testResults, setTestResults] = useState([]);
+  const [simpleTest, setSimpleTest] = useState(null);
+
+  useEffect(() => {
+    // Simple test first
+    const testPath = '/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg';
+    const encodedPath = encodeURI(testPath);
+
+    setSimpleTest({
+      original: testPath,
+      encoded: encodedPath,
+      manual: '/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg',
+      symlink: '/gbpics-test/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg'
+    });
+
+    const testImages = [
+      'Motor wash 06 copper.jpeg',
+      'Motor wash 07 sealed.jpeg',
+      'Motor wash G15 alu.jpeg'
+    ];
+
+    const basePath = '/GBPICS/Washing Machine spare pic/Motor/Wash Motor';
+    const imageObjects = testImages.map(filename =>
+      createImageObject(basePath, filename)
+    );
+
+    // Test each image
+    const testPromises = imageObjects.map(async (imageObj) => {
+      try {
+        const response = await fetch(imageObj.path, { method: 'HEAD' });
+        return {
+          ...imageObj,
+          status: response.ok ? 'success' : 'failed',
+          statusCode: response.status
+        };
+      } catch (error) {
+        return {
+          ...imageObj,
+          status: 'error',
+          error: error.message
+        };
+      }
+    });
+
+    Promise.all(testPromises).then(setTestResults);
+  }, []);
+
+  return (
+    <div className="max-w-4xl mx-auto p-8">
+      <h1 className="text-3xl font-bold mb-8">Image Loading Test</h1>
+
+      {/* Simple Test Section */}
+      {simpleTest && (
+        <div className="mb-8 p-4 bg-yellow-50 rounded-lg">
+          <h2 className="text-xl font-semibold mb-4">Simple Path Test</h2>
+          <div className="space-y-4">
+            <div>
+              <p><strong>Original:</strong> <code className="text-sm bg-gray-100 p-1 rounded">{simpleTest.original}</code></p>
+              <img src={simpleTest.original} alt="Original path test" className="w-32 h-32 object-cover border mt-2" onError={(e) => e.target.style.border = '2px solid red'} />
+            </div>
+            <div>
+              <p><strong>Encoded:</strong> <code className="text-sm bg-gray-100 p-1 rounded">{simpleTest.encoded}</code></p>
+              <img src={simpleTest.encoded} alt="Encoded path test" className="w-32 h-32 object-cover border mt-2" onError={(e) => e.target.style.border = '2px solid red'} />
+            </div>
+            <div>
+              <p><strong>Manual:</strong> <code className="text-sm bg-gray-100 p-1 rounded">{simpleTest.manual}</code></p>
+              <img src={simpleTest.manual} alt="Manual path test" className="w-32 h-32 object-cover border mt-2" onError={(e) => e.target.style.border = '2px solid red'} />
+            </div>
+            <div>
+              <p><strong>Symlink:</strong> <code className="text-sm bg-gray-100 p-1 rounded">{simpleTest.symlink}</code></p>
+              <img src={simpleTest.symlink} alt="Symlink path test" className="w-32 h-32 object-cover border mt-2" onError={(e) => e.target.style.border = '2px solid red'} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="space-y-6">
+        {testResults.map((result, index) => (
+          <div key={index} className="border rounded-lg p-4">
+            <h3 className="text-lg font-semibold mb-2">{result.name}</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p><strong>Path:</strong> <code className="text-sm bg-gray-100 p-1 rounded">{result.path}</code></p>
+                <p><strong>Status:</strong> 
+                  <span className={`ml-2 px-2 py-1 rounded text-sm ${
+                    result.status === 'success' ? 'bg-green-100 text-green-800' :
+                    result.status === 'failed' ? 'bg-red-100 text-red-800' :
+                    'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {result.status} {result.statusCode && `(${result.statusCode})`}
+                  </span>
+                </p>
+                {result.error && <p><strong>Error:</strong> {result.error}</p>}
+              </div>
+              <div>
+                {result.status === 'success' ? (
+                  <img 
+                    src={result.path} 
+                    alt={result.name}
+                    className="w-32 h-32 object-cover rounded border"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                ) : null}
+                <div className="w-32 h-32 bg-gray-200 rounded border flex items-center justify-center text-gray-500 text-sm" style={{display: 'none'}}>
+                  Failed to load
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-8 p-4 bg-blue-50 rounded-lg">
+        <h3 className="text-lg font-semibold mb-2">Direct Test Links</h3>
+        <div className="space-y-2">
+          <a 
+            href="/GBPICS/Washing%20Machine%20spare%20pic/Motor/Wash%20Motor/Motor%20wash%2006%20copper.jpeg" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block text-blue-600 hover:underline"
+          >
+            Test Direct Image Link 1
+          </a>
+          <a 
+            href="/GBPICS/Washing Machine spare pic/Motor/Wash Motor/Motor wash 06 copper.jpeg" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="block text-blue-600 hover:underline"
+          >
+            Test Direct Image Link 2 (unencoded)
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}

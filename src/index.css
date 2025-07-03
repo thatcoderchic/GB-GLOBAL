@@ -35,6 +35,32 @@
   img {
     max-width: 100%;
     height: auto;
+    /* Prevent layout shift during loading */
+    aspect-ratio: attr(width) / attr(height);
+    /* Improve image rendering */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Optimize image loading */
+  img[loading="lazy"] {
+    /* Add a subtle fade-in effect */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+
+  /* Prevent broken image icons */
+  img::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
   }
 
   /* Better form element styling */
@@ -78,6 +104,25 @@
   .skeleton {
     @apply animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200 bg-[length:200%_100%];
     animation: skeleton-loading 1.5s infinite;
+  }
+
+  /* Image loading states */
+  .image-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+  }
+
+  .image-error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc2626;
+  }
+
+  .image-loaded {
+    animation: fadeInImage 0.5s ease-out;
   }
 
   /* Improved search styles */
@@ -135,6 +180,26 @@
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

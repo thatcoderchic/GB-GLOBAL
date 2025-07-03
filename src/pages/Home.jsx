@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import ImageWithFallback from '../components/ImageWithFallback';
+import OptimizedImage from '../components/OptimizedImage';
+import { preloadCriticalImages, preloadCategoryImages } from '../utils/imagePreloader';
 
 const allProducts = [
   {
@@ -223,6 +224,19 @@ export default function Home() {
     },
   ];
 
+  // Preload critical images on component mount
+  useEffect(() => {
+    const criticalImages = categories.map(cat => cat.image);
+    preloadCriticalImages(criticalImages);
+
+    // Preload category-specific images for better performance
+    setTimeout(() => {
+      preloadCategoryImages('washing-machine');
+      preloadCategoryImages('microwave');
+      preloadCategoryImages('car-washer');
+    }, 1000); // Delay to not block initial render
+  }, []);
+
   // Function to trigger navbar dropdown programmatically
   const handleExploreCategory = (categoryId) => {
     // Add visual feedback
@@ -356,11 +370,12 @@ export default function Home() {
                   className="card group flex flex-col h-full"
                 >
                   <div className="aspect-w-16 aspect-h-9 bg-neutral-200 overflow-hidden rounded-t-xl">
-                    <img
+                    <OptimizedImage
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
                       src={product.image}
                       alt={product.name}
                       loading="lazy"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-4 lg:p-6 flex-1 flex flex-col">
@@ -412,11 +427,13 @@ export default function Home() {
               {/* Image Container */}
               <div className="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
-                <ImageWithFallback
+                <OptimizedImage
                   className="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                   src={category.image}
                   alt={category.title}
                   loading="lazy"
+                  priority={index === 0} // First image gets priority loading
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 {/* Product Count Badge */}
                 <div className="absolute top-3 right-3 lg:top-4 lg:right-4 z-20">

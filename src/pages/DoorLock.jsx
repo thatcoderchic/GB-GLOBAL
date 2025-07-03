@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { createImageObject } from '../utils/imageUtils';
 
 export default function DoorLock() {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   useEffect(() => {
     // This array contains all the image filenames from the Door Lock folder
@@ -21,23 +23,21 @@ export default function DoorLock() {
     ];
 
     // Create an array of image objects with paths and formatted names
+    const basePath = '/GBPICS/Washing Machine spare pic/Door Lock';
     const formattedImages = imageFiles.map(filename => {
-      // Format the name by removing the file extension and cleaning it up
-      const name = filename
-        .replace('.jpeg', '')
-        .replace(/_/g, ' ') // Replace underscores with spaces
-        .trim(); // Remove any extra whitespace
-
-      return {
-        path: `/GBPICS/Washing Machine spare pic/Door Lock/${filename}`,
-        name: name,
-        id: filename.replace('.jpeg', '').replace(/[^a-zA-Z0-9]/g, '-').toLowerCase()
-      };
+      const imageObj = createImageObject(basePath, filename);
+      // Apply custom formatting for door lock names
+      imageObj.name = imageObj.name.replace(/_/g, ' '); // Replace underscores with spaces
+      return imageObj;
     });
 
     setImages(formattedImages);
     setLoading(false);
   }, []);
+
+  const handleImageError = (imageId) => {
+    setFailedImages(prev => new Set([...prev, imageId]));
+  };
 
   return (
     <div className="animate-fade-in">
@@ -113,11 +113,23 @@ export default function DoorLock() {
             {images.map((image) => (
               <div key={image.id} className="group bg-white rounded-xl shadow-card overflow-hidden hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-w-1 aspect-h-1 bg-neutral-100 overflow-hidden">
-                  <img
-                    src={image.path}
-                    alt={image.name}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
-                  />
+                  {failedImages.has(image.id) ? (
+                    <div className="w-full h-full flex items-center justify-center bg-neutral-100">
+                      <div className="text-center">
+                        <svg className="mx-auto h-12 w-12 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <p className="mt-2 text-sm text-neutral-500">Image not available</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <img
+                      src={image.path}
+                      alt={image.name}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                      onError={() => handleImageError(image.id)}
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-semibold text-neutral-800 group-hover:text-brand-600 transition-colors duration-150 ease-in-out">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function ImageWithFallback({
   src,
@@ -6,23 +6,48 @@ export default function ImageWithFallback({
   className,
   fallbackSrc,
   loading = 'lazy',
+  priority = false,
+  sizes,
   ...props
 }) {
   const [imageError, setImageError] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
+  const imgRef = useRef(null);
+  const maxRetries = 2;
+
+  // Preload critical images
+  useEffect(() => {
+    if (priority && src) {
+      const img = new Image();
+      img.src = src;
+    }
+  }, [src, priority]);
 
   useEffect(() => {
     setImageError(false);
     setImageLoading(true);
+    setRetryCount(0);
   }, [src]);
 
   const handleImageError = () => {
-    setImageError(true);
-    setImageLoading(false);
+    if (retryCount < maxRetries) {
+      // Retry loading the image
+      setRetryCount(prev => prev + 1);
+      setTimeout(() => {
+        if (imgRef.current) {
+          imgRef.current.src = src;
+        }
+      }, 1000 * (retryCount + 1)); // Exponential backoff
+    } else {
+      setImageError(true);
+      setImageLoading(false);
+    }
   };
 
   const handleImageLoad = () => {
     setImageLoading(false);
+    setImageError(false);
   };
 
   // Enhanced fallback image with better styling
@@ -35,18 +60,23 @@ export default function ImageWithFallback({
           <div className="skeleton w-full h-full absolute inset-0"></div>
           <div className="relative z-10 text-center">
             <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-brand-200 border-t-brand-600 rounded-full animate-spin mx-auto mb-2"></div>
-            <p className="text-xs text-neutral-500 font-medium">Loading...</p>
+            <p className="text-xs text-neutral-500 font-medium">
+              {retryCount > 0 ? `Retrying... (${retryCount}/${maxRetries})` : 'Loading...'}
+            </p>
           </div>
         </div>
       )}
 
       <img
+        ref={imgRef}
         src={imageError ? (fallbackSrc || defaultFallback) : src}
         alt={alt}
-        className={`${className} ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        className={`${className} ${imageLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}
         onError={handleImageError}
         onLoad={handleImageLoad}
-        loading={loading}
+        loading={priority ? 'eager' : loading}
+        sizes={sizes}
+        decoding="async"
         {...props}
       />
     </div>
